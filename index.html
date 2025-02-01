@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juegos Bíblicos PWA</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>📖 Juegos Bíblicos</h1>
+        <div class="game-buttons">
+            <button onclick="loadGame('tabu')">Tabú (50 tarjetas)</button>
+            <button onclick="loadGame('trivia')">Trivia (50 preguntas)</button>
+            <button onclick="loadGame('memo')">Memo (25 pares)</button>
+        </div>
+        <div id="game-container"></div>
+    </div>
+    <script src="app.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('service-worker.js')
+                .then(() => console.log('Service Worker registrado'))
+                .catch(err => console.error('Error:', err));
+        }
+    </script>
+</body>
+  </html>
