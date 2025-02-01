@@ -11,7 +11,6 @@ const bibleData = {
             prohibidas: ["Lana", "300", "Jueces"], 
             referencia: "Jueces 7:1-25" 
         },
-        // ... Ejemplos adicionales ... 
         { 
         palabra: "Rut", 
         prohibidas: ["Noemí", "Booz", "Espigas"], 
@@ -22,6 +21,61 @@ const bibleData = {
         prohibidas: ["Mártir", "Hechos", "Piedras"], 
         referencia: "Hechos 7:54-60" 
         },
+        {
+        palabra: "Adán",
+prohibidas: ["Eva", "Edén", "Manzana"],
+referencia: "Génesis 2-3"
+},
+{
+palabra: "Noé",
+prohibidas: ["Arca", "Diluvio", "Animales"],
+referencia: "Génesis 6-9"  
+},
+{
+palabra: "Abraham",
+prohibidas: ["Sara", "Isaac", "Promesa"],
+referencia: "Génesis 12-25"
+},
+{
+palabra: "Moisés", 
+prohibidas: ["Egipto", "Mar Rojo", "Tablas"],
+referencia: "Éxodo 2-Deuteronomio 34"
+},
+{
+palabra: "David",
+prohibidas: ["Goliat", "Salmo", "Belén"],
+referencia: "1 Samuel 16-1 Reyes 2"
+},
+{
+palabra: "Salomón",
+prohibidas: ["Sabiduría", "Templo", "Riquezas"],
+referencia: "1 Reyes 3-11"
+},
+{
+palabra: "Elías",
+prohibidas: ["Carro de fuego", "Profeta", "Carmelo"],
+referencia: "1 Reyes 17-2 Reyes 2"
+},
+{
+palabra: "Ester",
+prohibidas: ["Mardoqueo", "Asuero", "Purim"],
+referencia: "Libro de Ester"
+},
+{
+palabra: "Job",
+prohibidas: ["Pruebas", "Amigos", "Paciencia"],
+referencia: "Libro de Job"
+},
+{
+palabra: "Daniel",
+prohibidas: ["Leones", "Babilonia", "Sueños"],
+referencia: "Daniel 1-12"
+},
+{
+palabra: "Febe",
+prohibidas: ["Diaconisa", "Cencrea", "Pablo"],
+referencia: "Romanos 16:1-2"
+},
         // ... 48 tarjetas más ...
     ],
 
