@@ -3,20 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Juegos Bíblicos PWA</title>
+    <title>Juegos Bíblicos Multijugador</title>
     <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
-        <h1>📖 Juegos Bíblicos</h1>
-        <div class="game-buttons">
-            <button onclick="loadGame('tabu')">Tabú (50 tarjetas)</button>
-            <button onclick="loadGame('trivia')">Trivia (50 preguntas)</button>
-            <button onclick="loadGame('memo')">Memo (25 pares)</button>
+        <!-- Pantalla de inicio -->
+        <div id="start-screen">
+            <h1>📖 Juegos Bíblicos</h1>
+            <div class="player-inputs">
+                <input type="text" id="player1" placeholder="Jugador 1">
+                <input type="text" id="player2" placeholder="Jugador 2">
+                <button onclick="startGame()">Comenzar</button>
+            </div>
         </div>
-        <div id="game-container"></div>
+
+        <!-- Pantalla de juego -->
+        <div id="game-screen" style="display: none;">
+            <div class="scoreboard">
+                <span id="current-player"></span>
+                <div>
+                    <span id="score1">Jugador 1: 0 puntos</span>
+                    <span id="score2">Jugador 2: 0 puntos</span>
+                </div>
+            </div>
+            
+            <div class="game-buttons">
+                <button onclick="loadGame('tabu')">Tabú (100 tarjetas)</button>
+                <button onclick="loadGame('trivia')">Trivia (100 preguntas)</button>
+                <button onclick="loadGame('memo')">Memo (50 pares)</button>
+            </div>
+            <div id="game-container"></div>
+        </div>
     </div>
+
     <script src="app.js"></script>
     <script>
         if ('serviceWorker' in navigator) {
@@ -26,4 +47,4 @@
         }
     </script>
 </body>
-  </html>
+</html>
