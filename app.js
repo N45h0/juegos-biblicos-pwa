@@ -105,6 +105,42 @@ referencia: "Romanos 16:1-2"
         respuesta: 0,
         referencia: "Mateo 9:9"
         },
+        {
+    pregunta: "¿Cuántos días duró el diluvio?",
+    opciones: [40, 150, 365],
+    respuesta: 0,
+    referencia: "Génesis 7:17"
+},
+{
+    pregunta: "¿Qué apóstol era médico?",
+    opciones: ["Lucas", "Marcos", "Mateo"],
+    respuesta: 0,
+    referencia: "Colosenses 4:14"
+},
+{
+    pregunta: "¿Qué significa 'Emmanuel'?",
+    opciones: ["Dios con nosotros", "Rey de reyes", "Príncipe de paz"],
+    respuesta: 0,
+    referencia: "Mateo 1:23"
+},
+{
+    pregunta: "¿Dónde nació Jesús?",
+    opciones: ["Belén", "Nazaret", "Jerusalén"],
+    respuesta: 0,
+    referencia: "Mateo 2:1"
+},
+{
+    pregunta: "¿Quién traicionó a Jesús?",
+    opciones: ["Judas Iscariote", "Pedro", "Tomás"],
+    respuesta: 0,
+    referencia: "Mateo 26:14-16"
+},
+{
+    pregunta: "¿Qué apóstol escribió el libro de Apocalipsis?",
+    opciones: ["Juan", "Pablo", "Pedro"],
+    respuesta: 0,
+    referencia: "Apocalipsis 1:1-2"
+},
         // ... 48 preguntas más ...
     ],
 
@@ -130,6 +166,31 @@ referencia: "Romanos 16:1-2"
         pasaje1: "Mateo 6:14", 
         pasaje2: "Colosenses 3:13" 
         },
+        {
+    tema: "Creación",
+    pasaje1: "Génesis 1:1",
+    pasaje2: "Juan 1:3"
+},
+{
+    tema: "Pecado original",
+    pasaje1: "Romanos 3:23",
+    pasaje2: "Romanos 6:23"
+},
+{
+    tema: "Fe de Abraham",
+    pasaje1: "Génesis 15:6",
+    pasaje2: "Romanos 4:3"
+},
+{
+    tema: "Resurrección",
+    pasaje1: "1 Corintios 15:20",
+    pasaje2: "Juan 11:25"
+},
+{
+    tema: "Segunda Venida",
+    pasaje1: "Hechos 1:11",
+    pasaje2: "Apocalipsis 22:20"
+},
         // ... 23 pares más ...
     ]
 };
