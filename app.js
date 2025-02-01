@@ -1,24 +1,88 @@
-// Generador automático de contenido bíblico (NVI)
+// Datos reales de juegos bíblicos (NVI)
 const bibleData = {
-    tabu: Array.from({ length: 50 }, (_, i) => ({
-        palabra: `Personaje ${i + 1}`,
-        prohibidas: ["Palabra1", "Palabra2", "Palabra3"],
-        referencia: `Génesis ${i + 1}:${i + 1}`
-    })),
+    tabu: [
+        { 
+            palabra: "Jonás", 
+            prohibidas: ["Pez", "Nínive", "Tormenta"], 
+            referencia: "Jonás 1:1-17" 
+        },
+        { 
+            palabra: "Gedeón", 
+            prohibidas: ["Lana", "300", "Jueces"], 
+            referencia: "Jueces 7:1-25" 
+        },
+        // ... Ejemplos adicionales ... 
+        { 
+        palabra: "Rut", 
+        prohibidas: ["Noemí", "Booz", "Espigas"], 
+        referencia: "Rut 1:1-22" 
+        },
+        { 
+        palabra: "Esteban", 
+        prohibidas: ["Mártir", "Hechos", "Piedras"], 
+        referencia: "Hechos 7:54-60" 
+        },
+        // ... 48 tarjetas más ...
+    ],
 
-    trivia: Array.from({ length: 50 }, (_, i) => ({
-        pregunta: `Pregunta ${i + 1}: ¿Qué personaje hizo...?`,
-        opciones: ["Opción A", "Opción B", "Opción C"],
-        respuesta: Math.floor(Math.random() * 3),
-        referencia: `Hechos ${i + 1}:${i + 1}`
-    })),
+    trivia: [
+        {
+            pregunta: "¿Quién construyó el arca?",
+            opciones: ["Noé", "Moisés", "Abraham"],
+            respuesta: 0,
+            referencia: "Génesis 6:14"
+        },
+        {
+            pregunta: "¿Qué apóstol negó a Jesús tres veces?",
+            opciones: ["Pedro", "Juan", "Judas"],
+            respuesta: 0,
+            referencia: "Mateo 26:69-75"
+        },
+          // ... Ejemplos adicionales ...
+        {
+        pregunta: "¿Qué mujer fue convertida en estatua de sal?",
+        opciones: ["Eva", "Sara", "La esposa de Lot"],
+        respuesta: 2,
+        referencia: "Génesis 19:26"
+        },
+        {
+        pregunta: "¿Qué apóstol era recaudador de impuestos?",
+        opciones: ["Mateo", "Simón", "Bartolomé"],
+        respuesta: 0,
+        referencia: "Mateo 9:9"
+        },
+        // ... 48 preguntas más ...
+    ],
 
-    memo: Array.from({ length: 25 }, (_, i) => ({
-        tema: `Tema ${i + 1}`,
-        pasaje1: `Juan ${i + 1}:${i + 1}`,
-        pasaje2: `Romanos ${i + 1}:${i + 1}`
-    }))
+    memo: [
+        { 
+            tema: "Salvación por fe", 
+            pasaje1: "Efesios 2:8-9", 
+            pasaje2: "Romanos 3:28" 
+        },
+        { 
+            tema: "Amor al prójimo", 
+            pasaje1: "Mateo 22:39", 
+            pasaje2: "Levítico 19:18" 
+        },
+                // ... Ejemplos adicionales ...
+        { 
+        tema: "Resurrección", 
+        pasaje1: "1 Corintios 15:20", 
+        pasaje2: "Juan 11:25" 
+        },
+        { 
+        tema: "Perdón", 
+        pasaje1: "Mateo 6:14", 
+        pasaje2: "Colosenses 3:13" 
+        },
+        // ... 23 pares más ...
+    ]
 };
+
+// ====================================================
+// ¡No toques nada desde aquí hacia abajo! ↓
+// ====================================================
 
 // Cargar juego
 function loadGame(gameType) {
@@ -32,7 +96,7 @@ function loadGame(gameType) {
                     <div class="card">
                         <h3>${card.palabra}</h3>
                         <p>🚫 Prohibido usar: ${card.prohibidas.join(", ")}</p>
-                        <small>Referencia: ${card.referencia}</small>
+                        <small>${card.referencia}</small>
                     </div>
                 `;
             });
@@ -50,7 +114,7 @@ function loadGame(gameType) {
                                 </button>
                             `).join("")}
                         </div>
-                        <small>Ver: ${q.referencia}</small>
+                        <small>${q.referencia}</small>
                     </div>
                 `;
             });
@@ -73,4 +137,4 @@ function loadGame(gameType) {
 function checkAnswer(questionIndex, selectedOption) {
     const correct = bibleData.trivia[questionIndex].respuesta === selectedOption;
     alert(correct ? "✅ Correcto!" : "❌ Incorrecto. Revisa " + bibleData.trivia[questionIndex].referencia);
-}
+            }
