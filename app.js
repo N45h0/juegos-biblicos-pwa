@@ -84,7 +84,35 @@ const bibleData = {
 // ¡No toques nada desde aquí hacia abajo! ↓
 // ====================================================
 
-// Cargar juego
+
+// ========== LÓGICA MULTIJUGADOR ========== //
+let players = {
+    player1: { name: "", score: 0 },
+    player2: { name: "", score: 0 },
+    currentTurn: 1
+};
+
+function startGame() {
+    players.player1.name = document.getElementById('player1').value || "Jugador 1";
+    players.player2.name = document.getElementById('player2').value || "Jugador 2";
+    
+    document.getElementById('start-screen').style.display = "none";
+    document.getElementById('game-screen').style.display = "block";
+    updateScoreboard();
+}
+
+function updateScoreboard() {
+    document.getElementById('current-player').textContent = `Turno: ${players[`player${players.currentTurn}`].name}`;
+    document.getElementById('score1').textContent = `${players.player1.name}: ${players.player1.score} puntos`;
+    document.getElementById('score2').textContent = `${players.player2.name}: ${players.player2.score} puntos`;
+}
+
+function switchTurn() {
+    players.currentTurn = players.currentTurn === 1 ? 2 : 1;
+    updateScoreboard();
+}
+
+// ========== JUEGOS ========== //
 function loadGame(gameType) {
     const container = document.getElementById("game-container");
     container.innerHTML = "";
@@ -95,7 +123,7 @@ function loadGame(gameType) {
                 container.innerHTML += `
                     <div class="card">
                         <h3>${card.palabra}</h3>
-                        <p>🚫 Prohibido usar: ${card.prohibidas.join(", ")}</p>
+                        <p>🚫 Prohibido: ${card.prohibidas.join(", ")}</p>
                         <small>${card.referencia}</small>
                     </div>
                 `;
@@ -109,7 +137,7 @@ function loadGame(gameType) {
                         <h3>${q.pregunta}</h3>
                         <div class="opciones">
                             ${q.opciones.map((op, i) => `
-                                <button onclick="checkAnswer(${index}, ${i})">
+                                <button onclick="handleTriviaAnswer(${index}, ${i})">
                                     ${op}
                                 </button>
                             `).join("")}
@@ -121,20 +149,39 @@ function loadGame(gameType) {
             break;
 
         case "memo":
+            // Lógica de Memo interactivo (pares volteables)
             container.innerHTML = `
-                <div class="memo-grid">
-                    ${bibleData.memo.flatMap(pair => [
-                        `<div class="memo-card">${pair.tema}<br>${pair.pasaje1}</div>`,
-                        `<div class="memo-card">${pair.tema}<br>${pair.pasaje2}</div>`
-                    ]).join("")}
+                <div class="memo-grid" id="memo-grid">
+                    ${shuffleArray([...bibleData.memo.flatMap(pair => [pair.pasaje1, pair.pasaje2])])
+                        .map(text => `
+                            <div class="memo-card" onclick="flipCard(this)">
+                                <div class="front">?</div>
+                                <div class="back">${text}</div>
+                            </div>
+                        `).join("")}
                 </div>
             `;
             break;
     }
 }
 
-// Verificar respuesta (Trivia)
-function checkAnswer(questionIndex, selectedOption) {
+function handleTriviaAnswer(questionIndex, selectedOption) {
     const correct = bibleData.trivia[questionIndex].respuesta === selectedOption;
-    alert(correct ? "✅ Correcto!" : "❌ Incorrecto. Revisa " + bibleData.trivia[questionIndex].referencia);
-            }
+    if (correct) {
+        players[`player${players.currentTurn}`].score += 10;
+    }
+    alert(correct ? "✅ Correcto! +10 puntos" : "❌ Incorrecto. Revisa " + bibleData.trivia[questionIndex].referencia);
+    switchTurn();
+}
+
+// ========== FUNCIONES AUXILIARES ========== //
+function shuffleArray(array) {
+    return array.sort(() => Math.random() - 0.5);
+}
+
+function flipCard(card) {
+    if (!card.classList.contains('flipped')) {
+        card.classList.add('flipped');
+        // Lógica para emparejar cartas y sumar puntos
+    }
+}
