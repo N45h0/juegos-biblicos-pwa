@@ -145,3 +145,53 @@ button:hover {
     color: #2c3e50;
     margin-bottom: 15px;
 }
+
+/* Estilos para el Tabú */
+.tabu-card {
+    background: #fff;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.prohibidas-box {
+    background: #f8d7da;
+    padding: 15px;
+    border-radius: 8px;
+    margin: 20px 0;
+}
+
+.violation-check {
+    display: inline-block;
+    margin: 8px;
+    padding: 8px 12px;
+    background: #fff;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.tabu-controls {
+    display: grid;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.tabu-controls button {
+    padding: 12px;
+    font-size: 1.1em;
+}
+
+.guesser-selection {
+    margin-top: 15px;
+    padding: 15px;
+    background: #e2f3e8;
+    border-radius: 8px;
+}
+
+.guesser-selection button {
+    margin: 5px;
+    padding: 8px 12px;
+    background: #28a745;
+}
