@@ -201,30 +201,79 @@ referencia: "Romanos 16:1-2"
 
 
 // ========== LÓGICA MULTIJUGADOR ========== //
-let players = {
-    player1: { name: "", score: 0 },
-    player2: { name: "", score: 0 },
-    currentTurn: 1
-};
+// Variables globales
+let players = [];
+let currentPlayerIndex = 0;
 
-function startGame() {
-    players.player1.name = document.getElementById('player1').value || "Jugador 1";
-    players.player2.name = document.getElementById('player2').value || "Jugador 2";
+// Función para crear inputs dinámicos
+function createPlayerInputs(numberOfPlayers) {
+    const container = document.getElementById('player-inputs-container');
+    container.innerHTML = '';
     
-    document.getElementById('start-screen').style.display = "none";
-    document.getElementById('game-screen').style.display = "block";
+    for(let i = 1; i <= numberOfPlayers; i++) {
+        container.innerHTML += `
+            <input type="text" 
+                   id="player${i}" 
+                   placeholder="Jugador ${i}" 
+                   required>
+        `;
+    }
+}
+
+
+// Función para iniciar el juego
+function startGame() {
+    const numberOfPlayers = document.getElementById('player-count').value;
+    players = [];
+    
+    for(let i = 1; i <= numberOfPlayers; i++) {
+        const name = document.getElementById(`player${i}`).value || `Jugador ${i}`;
+        players.push({
+            name: name,
+            score: 0
+        });
+    }
+    
+    document.getElementById('start-screen').style.display = 'none';
+    document.getElementById('game-screen').style.display = 'block';
     updateScoreboard();
 }
 
+
+// Actualizar marcador
 function updateScoreboard() {
-    document.getElementById('current-player').textContent = `Turno: ${players[`player${players.currentTurn}`].name}`;
-    document.getElementById('score1').textContent = `${players.player1.name}: ${players.player1.score} puntos`;
-    document.getElementById('score2').textContent = `${players.player2.name}: ${players.player2.score} puntos`;
+    const scoresContainer = document.getElementById('scores-container');
+    const currentPlayer = document.getElementById('current-player-name');
+    
+    // Actualizar puntuaciones
+    scoresContainer.innerHTML = players.map(player => `
+        <div class="score-item">
+            ${player.name}: <span>${player.score} pts</span>
+        </div>
+    `).join('');
+    
+    // Actualizar turno actual
+    currentPlayer.textContent = players[currentPlayerIndex].name;
 }
 
-function switchTurn() {
-    players.currentTurn = players.currentTurn === 1 ? 2 : 1;
+// Sistema de turnos
+function nextTurn() {
+    currentPlayerIndex = (currentPlayerIndex + 1) % players.length;
     updateScoreboard();
+}
+
+// Modificar función de respuestas
+function handleAnswer(questionIndex, selectedOption) {
+    const correct = bibleData.trivia[questionIndex].respuesta === selectedOption;
+    
+    if(correct) {
+        players[currentPlayerIndex].score += 10;
+        alert(`✅ Correcto! +10 puntos para ${players[currentPlayerIndex].name}`);
+    } else {
+        alert(`❌ Incorrecto. Respuesta correcta: ${bibleData.trivia[questionIndex].opciones[bibleData.trivia[questionIndex].respuesta]}`);
+    }
+    
+    nextTurn();
 }
 
 // ========== JUEGOS ========== //
