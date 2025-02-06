@@ -12,9 +12,23 @@
         <!-- Pantalla de inicio -->
         <div id="start-screen">
             <h1>📖 Juegos Bíblicos</h1>
-            <div class="player-inputs">
-                <input type="text" id="player1" placeholder="Jugador 1">
-                <input type="text" id="player2" placeholder="Jugador 2">
+            <div class="player-setup">
+                <div class="player-number">
+                    <label>Número de jugadores:</label>
+                    <select id="player-count" onchange="createPlayerInputs(this.value)">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                    </select>
+                </div>
+                <div class="player-inputs" id="player-inputs-container">
+                    <!-- Inputs dinámicos -->
+                </div>
                 <button onclick="startGame()">Comenzar</button>
             </div>
         </div>
@@ -22,11 +36,8 @@
         <!-- Pantalla de juego -->
         <div id="game-screen" style="display: none;">
             <div class="scoreboard">
-                <span id="current-player"></span>
-                <div>
-                    <span id="score1">Jugador 1: 0 puntos</span>
-                    <span id="score2">Jugador 2: 0 puntos</span>
-                </div>
+                <div class="current-player">Turno: <span id="current-player-name"></span></div>
+                <div class="scores" id="scores-container"></div>
             </div>
             
             <div class="game-buttons">
@@ -39,12 +50,5 @@
     </div>
 
     <script src="app.js"></script>
-    <script>
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('service-worker.js')
-                .then(() => console.log('Service Worker registrado'))
-                .catch(err => console.error('Error:', err));
-        }
-    </script>
 </body>
 </html>
