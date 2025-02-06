@@ -81,36 +81,67 @@ button:hover {
     transition: transform 0.3s;
 }
 
-.player-inputs {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    max-width: 300px;
+.memo-card:hover {
+    transform: scale(1.05);
+}
+
+/* Nuevos estilos para múltiples jugadores */
+.player-setup {
+    max-width: 500px;
     margin: 20px auto;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 10px;
+}
+
+.player-number {
+    margin-bottom: 15px;
+}
+
+.player-number label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.player-number select {
+    width: 100%;
+    padding: 8px;
+    border: 2px solid #3498db;
+    border-radius: 5px;
+}
+
+.player-inputs {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin: 15px 0;
 }
 
 .player-inputs input {
-    padding: 12px;
-    border: 2px solid #3498db;
-    border-radius: 8px;
-    font-size: 1em;
-}
-
-.scoreboard {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
     padding: 10px;
-    background: #f0f8ff;
-    border-radius: 8px;
+    border: 2px solid #e0e0e0;
+    border-radius: 5px;
+    width: 100%;
 }
 
-#current-player {
+.scores {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.score-item {
+    background: #e3f2fd;
+    padding: 8px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.current-player {
+    font-size: 1.2em;
     font-weight: bold;
     color: #2c3e50;
-    font-size: 1.2em;
+    margin-bottom: 15px;
 }
-.memo-card:hover {
-    transform: scale(1.05);
-  }
