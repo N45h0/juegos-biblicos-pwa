@@ -76,6 +76,396 @@ const bibleData = {
             prohibidas: ["Diaconisa", "Cencrea", "Pablo"],
             referencia: "Romanos 16:1-2"
         },
+        {
+            palabra: "Pablo",
+            prohibidas: ["Damasco", "Cartas", "Conversión"],
+            referencia: "Hechos 9:1-31"
+        },
+        {
+            palabra: "Pedro",
+            prohibidas: ["Pescador", "Iglesia", "Negación"],
+            referencia: "Mateo 4:18-20, Hechos 10"
+        },
+        {
+            palabra: "Juan el Bautista",
+            prohibidas: ["Desierto", "Bautismo", "Herodes"],
+            referencia: "Mateo 3:1-17"
+        },
+        {
+            palabra: "Lázaro",
+            prohibidas: ["Resurrección", "Betania", "Jesús"],
+            referencia: "Juan 11:1-44"
+        },
+        {
+            palabra: "María (madre de Jesús)",
+            prohibidas: ["Ángel", "Belén", "Virgen"],
+            referencia: "Lucas 1:26-56"
+        },
+        {
+            palabra: "María Magdalena",
+            prohibidas: ["Resurrección", "Tumba", "Jesús"],
+            referencia: "Juan 20:1-18"
+        },
+        {
+            palabra: "Tomás",
+            prohibidas: ["Dudas", "Herida", "Jesús"],
+            referencia: "Juan 20:24-29"
+        },
+        {
+            palabra: "José (esposo de María)",
+            prohibidas: ["Carpintero", "Egipto", "Sueños"],
+            referencia: "Mateo 1:18-25"
+        },
+        {
+            palabra: "José (hijo de Jacob)",
+            prohibidas: ["Egipto", "Coatas", "Sueños"],
+            referencia: "Génesis 37-50"
+        },
+        {
+            palabra: "Sansón",
+            prohibidas: ["Cabello", "Fuerza", "Dalila"],
+            referencia: "Jueces 13-16"
+        },
+        {
+            palabra: "Samuel",
+            prohibidas: ["Eli", "Profeta", "Rey"],
+            referencia: "1 Samuel 1-25"
+        },
+        {
+            palabra: "Saúl",
+            prohibidas: ["Rey", "David", "Espíritu"],
+            referencia: "1 Samuel 9-31"
+        },
+        {
+            palabra: "Timoteo",
+            prohibidas: ["Pablo", "Discípulo", "Cartas"],
+            referencia: "Hechos 16:1-3, 1 Timoteo"
+        },
+        {
+            palabra: "Tito",
+            prohibidas: ["Pablo", "Creta", "Carta"],
+            referencia: "Tito 1:1-5"
+        },
+        {
+            palabra: "Lucas",
+            prohibidas: ["Médico", "Evangelio", "Hechos"],
+            referencia: "Colosenses 4:14"
+        },
+        {
+            palabra: "Marcos",
+            prohibidas: ["Evangelio", "Juan Marcos", "Pablo"],
+            referencia: "Hechos 12:12"
+        },
+        {
+            palabra: "Mateo",
+            prohibidas: ["Recaudador", "Evangelio", "Jesús"],
+            referencia: "Mateo 9:9-13"
+        },
+        {
+            palabra: "Judas Iscariote",
+            prohibidas: ["Traición", "30 monedas", "Beso"],
+            referencia: "Mateo 26:14-16"
+        },
+        {
+            palabra: "Judas (hermano de Jesús)",
+            prohibidas: ["Carta", "Judas", "Hermano"],
+            referencia: "Judas 1:1"
+        },
+        {
+            palabra: "Santiago",
+            prohibidas: ["Hermano de Jesús", "Carta", "Jerusalén"],
+            referencia: "Hechos 15:13-21"
+        },
+        {
+            palabra: "Felipe",
+            prohibidas: ["Apóstol", "Etiopía", "Evangelio"],
+            referencia: "Hechos 8:26-40"
+        },
+        {
+            palabra: "Bartolomé",
+            prohibidas: ["Apóstol", "Natanael", "Jesús"],
+            referencia: "Juan 1:45-51"
+        },
+        {
+            palabra: "Andrés",
+            prohibidas: ["Pescador", "Pedro", "Apóstol"],
+            referencia: "Mateo 4:18-20"
+        },
+        {
+            palabra: "Matías",
+            prohibidas: ["Apóstol", "Reemplazo", "Judas"],
+            referencia: "Hechos 1:23-26"
+        },
+        {
+            palabra: "Cornelio",
+            prohibidas: ["Centurión", "Pedro", "Bautismo"],
+            referencia: "Hechos 10:1-48"
+        },
+        {
+            palabra: "Lidia",
+            prohibidas: ["Púrpura", "Filipos", "Pablo"],
+            referencia: "Hechos 16:14-15"
+        },
+        {
+            palabra: "Priscila",
+            prohibidas: ["Aquila", "Pablo", "Iglesia"],
+            referencia: "Hechos 18:2-3"
+        },
+        {
+            palabra: "Aquila",
+            prohibidas: ["Priscila", "Pablo", "Tienda"],
+            referencia: "Hechos 18:2-3"
+        },
+        {
+            palabra: "Bernabé",
+            prohibidas: ["Pablo", "Misionero", "Chipre"],
+            referencia: "Hechos 4:36-37"
+        },
+        {
+            palabra: "Silas",
+            prohibidas: ["Pablo", "Cárcel", "Canto"],
+            referencia: "Hechos 16:25-40"
+        },
+        {
+            palabra: "Esteban",
+            prohibidas: ["Mártir", "Hechos", "Piedras"],
+            referencia: "Hechos 7:54-60"
+        },
+        {
+            palabra: "Félix",
+            prohibidas: ["Gobernador", "Pablo", "Justicia"],
+            referencia: "Hechos 24:1-27"
+        },
+        {
+            palabra: "Festus",
+            prohibidas: ["Gobernador", "Pablo", "César"],
+            referencia: "Hechos 25:1-12"
+        },
+        {
+            palabra: "Herodes",
+            prohibidas: ["Rey", "Jesús", "Matanza"],
+            referencia: "Mateo 2:1-18"
+        },
+        {
+            palabra: "Pilato",
+            prohibidas: ["Jesús", "Juicio", "Lavado de manos"],
+            referencia: "Mateo 27:11-26"
+        },
+        {
+            palabra: "Zaqueo",
+            prohibidas: ["Árbol", "Recaudador", "Jesús"],
+            referencia: "Lucas 19:1-10"
+        },
+        {
+            palabra: "Nicodemo",
+            prohibidas: ["Fariseo", "Noche", "Nacer de nuevo"],
+            referencia: "Juan 3:1-21"
+        },
+        {
+            palabra: "Marta",
+            prohibidas: ["María", "Lázaro", "Sirvienta"],
+            referencia: "Lucas 10:38-42"
+        },
+        {
+            palabra: "Eliseo",
+            prohibidas: ["Profeta", "Elías", "Milagros"],
+            referencia: "2 Reyes 2:1-25"
+        },
+        {
+            palabra: "Isaías",
+            prohibidas: ["Profeta", "Emanuel", "Rollo"],
+            referencia: "Isaías 6:1-13"
+        },
+        {
+            palabra: "Jeremías",
+            prohibidas: ["Profeta", "Lamentaciones", "Cautiverio"],
+            referencia: "Jeremías 1:1-19"
+        },
+        {
+            palabra: "Ezequiel",
+            prohibidas: ["Profeta", "Visión", "Ruedas"],
+            referencia: "Ezequiel 1:1-28"
+        },
+        {
+            palabra: "Oseas",
+            prohibidas: ["Profeta", "Gomer", "Adulterio"],
+            referencia: "Oseas 1:1-11"
+        },
+        {
+            palabra: "Amós",
+            prohibidas: ["Profeta", "Pastor", "Justicia"],
+            referencia: "Amós 1:1-2"
+        },
+        {
+            palabra: "Miqueas",
+            prohibidas: ["Profeta", "Belén", "Justicia"],
+            referencia: "Miqueas 1:1-16"
+        },
+        {
+            palabra: "Habacuc",
+            prohibidas: ["Profeta", "Torre", "Justicia"],
+            referencia: "Habacuc 1:1-17"
+        },
+        {
+            palabra: "Sofonías",
+            prohibidas: ["Profeta", "Día del Señor", "Juicio"],
+            referencia: "Sofonías 1:1-18"
+        },
+        {
+            palabra: "Hageo",
+            prohibidas: ["Profeta", "Templo", "Reconstrucción"],
+            referencia: "Hageo 1:1-15"
+        },
+        {
+            palabra: "Zacarías",
+            prohibidas: ["Profeta", "Visión", "Templo"],
+            referencia: "Zacarías 1:1-21"
+        },
+        {
+            palabra: "Malaquías",
+            prohibidas: ["Profeta", "Diezmo", "Juicio"],
+            referencia: "Malaquías 1:1-14"
+        },
+        {
+            palabra: "Esdras",
+            prohibidas: ["Sacerdote", "Ley", "Templo"],
+            referencia: "Esdras 7:1-10"
+        },
+        {
+            palabra: "Nehemías",
+            prohibidas: ["Muro", "Jerusalén", "Reconstrucción"],
+            referencia: "Nehemías 1:1-11"
+        },
+        {
+            palabra: "Caleb",
+            prohibidas: ["Espía", "Canaán", "Herencia"],
+            referencia: "Números 13-14"
+        },
+        {
+            palabra: "Josué",
+            prohibidas: ["Canaán", "Jericó", "Conquista"],
+            referencia: "Josué 1:1-9"
+        },
+        {
+            palabra: "Debora",
+            prohibidas: ["Jueces", "Cántico", "Barac"],
+            referencia: "Jueces 4-5"
+        },
+        {
+            palabra: "Jael",
+            prohibidas: ["Estaca", "Sísara", "Tienda"],
+            referencia: "Jueces 4:17-22"
+        },
+        {
+            palabra: "Raquel",
+            prohibidas: ["Jacob", "Esteril", "Benjamín"],
+            referencia: "Génesis 29-35"
+        },
+        {
+            palabra: "Lea",
+            prohibidas: ["Jacob", "Hijos", "Ojos"],
+            referencia: "Génesis 29-30"
+        },
+        {
+            palabra: "Rebeca",
+            prohibidas: ["Isaac", "Esaú", "Jacob"],
+            referencia: "Génesis 24-27"
+        },
+        {
+            palabra: "Sara",
+            prohibidas: ["Abraham", "Isaac", "Risa"],
+            referencia: "Génesis 17-23"
+        },
+        {
+            palabra: "Lot",
+            prohibidas: ["Sodoma", "Esposa", "Sal"],
+            referencia: "Génesis 19:1-29"
+        },
+        {
+            palabra: "Melquisedec",
+            prohibidas: ["Sacerdote", "Pan", "Vino"],
+            referencia: "Génesis 14:18-20"
+        },
+        {
+            palabra: "Enoc",
+            prohibidas: ["Caminó con Dios", "Arrebatado", "Génesis"],
+            referencia: "Génesis 5:21-24"
+        },
+        {
+            palabra: "Caín",
+            prohibidas: ["Abel", "Asesinato", "Marca"],
+            referencia: "Génesis 4:1-16"
+        },
+        {
+            palabra: "Abel",
+            prohibidas: ["Caín", "Ofrenda", "Pastor"],
+            referencia: "Génesis 4:1-16"
+        },
+        {
+            palabra: "Lamec",
+            prohibidas: ["Adán", "Caín", "Venganza"],
+            referencia: "Génesis 4:19-24"
+        },
+        {
+            palabra: "Noemí",
+            prohibidas: ["Rut", "Booz", "Mara"],
+            referencia: "Rut 1:1-22"
+        },
+        {
+            palabra: "Booz",
+            prohibidas: ["Rut", "Noemí", "Espigas"],
+            referencia: "Rut 2:1-23"
+        },
+        {
+            palabra: "Mardoqueo",
+            prohibidas: ["Ester", "Asuero", "Purim"],
+            referencia: "Ester 2:1-23"
+        },
+        {
+            palabra: "Asuero",
+            prohibidas: ["Ester", "Mardoqueo", "Purim"],
+            referencia: "Ester 1:1-22"
+        },
+        {
+            palabra: "Vasti",
+            prohibidas: ["Reina", "Asuero", "Banquete"],
+            referencia: "Ester 1:9-22"
+        },
+        {
+            palabra: "Haman",
+            prohibidas: ["Ester", "Mardoqueo", "Horca"],
+            referencia: "Ester 3:1-15"
+        },
+        {
+            palabra: "Zorobabel",
+            prohibidas: ["Templo", "Reconstrucción", "Esdras"],
+            referencia: "Esdras 3:1-13"
+        },
+        {
+            palabra: "Esdras",
+            prohibidas: ["Sacerdote", "Ley", "Templo"],
+            referencia: "Esdras 7:1-10"
+        },
+        {
+            palabra: "Nehemías",
+            prohibidas: ["Muro", "Jerusalén", "Reconstrucción"],
+            referencia: "Nehemías 1:1-11"
+        },
+        {
+            palabra: "Caleb",
+            prohibidas: ["Espía", "Canaán", "Herencia"],
+            referencia: "Números 13-14"
+        },
+        {
+            palabra: "Josué",
+            prohibidas: ["Canaán", "Jericó", "Conquista"],
+            referencia: "Josué 1:1-9"
+        },
+        {
+            palabra: "Debora",
+            prohibidas: ["Jueces", "Cántico", "Barac"],
+            referencia: "Jueces 4-5"
+        },
         // ... 48 tarjetas más ...
     ],
 
