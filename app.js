@@ -194,7 +194,10 @@ const bibleData = {
 let players = [];
 let currentPlayerIndex = 0;
 let currentTabuIndex = 0;
+let currentTriviaIndex = 0;
 let selectedViolations = [];
+let flippedCards = [];
+let matchedPairs = 0;
 
 // Función para crear inputs dinámicos
 function createPlayerInputs(numberOfPlayers) {
@@ -249,6 +252,21 @@ function updateScoreboard() {
 function nextTurn() {
     currentPlayerIndex = (currentPlayerIndex + 1) % players.length;
     updateScoreboard();
+    showTurnPopup(players[currentPlayerIndex].name);
+}
+
+// Mostrar popup de turno
+function showTurnPopup(playerName) {
+    const popup = document.getElementById('turn-popup');
+    const playerNameElement = document.getElementById('turn-player-name');
+    
+    playerNameElement.textContent = playerName;
+    popup.style.display = 'flex';
+
+    // Ocultar el popup después de 3 segundos
+    setTimeout(() => {
+        popup.style.display = 'none';
+    }, 3000);
 }
 
 // ====================================================
@@ -334,26 +352,90 @@ function nextTabuCard() {
 // ====================================================
 // LÓGICA DE TRIVIA
 // ====================================================
+function loadTriviaQuestion() {
+    const question = bibleData.trivia[currentTriviaIndex];
+    const container = document.getElementById("game-container");
+    
+    container.innerHTML = `
+        <div class="card">
+            <h3>${question.pregunta}</h3>
+            <div class="opciones">
+                ${question.opciones.map((op, i) => `
+                    <button onclick="handleTriviaAnswer(${currentTriviaIndex}, ${i})">
+                        ${op}
+                    </button>
+                `).join("")}
+            </div>
+            <small>Referencia: ${question.referencia}</small>
+        </div>
+    `;
+}
+
 function handleTriviaAnswer(questionIndex, selectedOption) {
     const correct = bibleData.trivia[questionIndex].respuesta === selectedOption;
     
-    if(correct) {
+    if (correct) {
         players[currentPlayerIndex].score += 10;
         alert(`✅ Correcto! +10 puntos para ${players[currentPlayerIndex].name}`);
     } else {
         alert(`❌ Incorrecto. Respuesta correcta: ${bibleData.trivia[questionIndex].opciones[bibleData.trivia[questionIndex].respuesta]}`);
     }
     
+    currentTriviaIndex = (currentTriviaIndex + 1) % bibleData.trivia.length;
     nextTurn();
+    loadTriviaQuestion();
 }
 
 // ====================================================
 // LÓGICA DE MEMO
 // ====================================================
+function loadMemoGame() {
+    const container = document.getElementById("game-container");
+    const memoPairs = shuffleArray([...bibleData.memo.flatMap(pair => [pair.pasaje1, pair.pasaje2])]);
+    
+    container.innerHTML = `
+        <div class="memo-grid">
+            ${memoPairs.map(text => `
+                <div class="memo-card" onclick="flipCard(this)">
+                    <div class="front">?</div>
+                    <div class="back">${text}</div>
+                </div>
+            `).join("")}
+        </div>
+    `;
+}
+
 function flipCard(card) {
-    if (!card.classList.contains('flipped')) {
+    if (flippedCards.length < 2 && !card.classList.contains('flipped')) {
         card.classList.add('flipped');
-        // Lógica para emparejar cartas y sumar puntos
+        flippedCards.push(card);
+
+        if (flippedCards.length === 2) {
+            checkForMatch();
+        }
+    }
+}
+
+function checkForMatch() {
+    const [card1, card2] = flippedCards;
+    const text1 = card1.querySelector('.back').textContent;
+    const text2 = card2.querySelector('.back').textContent;
+
+    if (bibleData.memo.some(pair => 
+        (pair.pasaje1 === text1 && pair.pasaje2 === text2) || 
+        (pair.pasaje1 === text2 && pair.pasaje2 === text1)
+    )) {
+        matchedPairs++;
+        flippedCards = [];
+        if (matchedPairs === bibleData.memo.length) {
+            alert(`🎉 ¡Felicidades! Han encontrado todos los pares.`);
+        }
+    } else {
+        setTimeout(() => {
+            card1.classList.remove('flipped');
+            card2.classList.remove('flipped');
+            flippedCards = [];
+        }, 1000);
     }
 }
 
@@ -378,35 +460,13 @@ function loadGame(gameType) {
             break;
 
         case "trivia":
-            bibleData.trivia.forEach((q, index) => {
-                container.innerHTML += `
-                    <div class="card">
-                        <h3>${q.pregunta}</h3>
-                        <div class="opciones">
-                            ${q.opciones.map((op, i) => `
-                                <button onclick="handleTriviaAnswer(${index}, ${i})">
-                                    ${op}
-                                </button>
-                            `).join("")}
-                        </div>
-                        <small>${q.referencia}</small>
-                    </div>
-                `;
-            });
+            currentTriviaIndex = 0;
+            loadTriviaQuestion();
             break;
 
         case "memo":
-            container.innerHTML = `
-                <div class="memo-grid" id="memo-grid">
-                    ${shuffleArray([...bibleData.memo.flatMap(pair => [pair.pasaje1, pair.pasaje2])])
-                        .map(text => `
-                            <div class="memo-card" onclick="flipCard(this)">
-                                <div class="front">?</div>
-                                <div class="back">${text}</div>
-                            </div>
-                        `).join("")}
-                </div>
-            `;
+            matchedPairs = 0;
+            loadMemoGame();
             break;
     }
-                         }
+}
