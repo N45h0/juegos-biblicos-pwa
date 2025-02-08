@@ -1,65 +1,67 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Juegos Bíblicos Multijugador</title>
-    <link rel="manifest" href="manifest.json">
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <title>Juegos Bíblicos Multijugador</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <!-- Pantalla de inicio -->
-        <div id="start-screen">
-            <h1>📖 Juegos Bíblicos</h1>
-            <div class="player-setup">
-                <div class="player-number">
-                    <label>Número de jugadores:</label>
-                    <select id="player-count" onchange="createPlayerInputs(this.value)">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                    </select>
-                </div>
-                <div class="player-inputs" id="player-inputs-container">
-                    <!-- Inputs dinámicos -->
-                </div>
-                <button onclick="startGame()">Comenzar</button>
-            </div>
+  <div class="container">
+    <!-- Pantalla de inicio -->
+    <div id="start-screen">
+      <h1>📖 Juegos Bíblicos</h1>
+      <div class="player-setup">
+        <div class="player-number">
+          <label>Número de jugadores:</label>
+          <select id="player-count" onchange="createPlayerInputs(this.value)">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+          </select>
         </div>
-
-        <!-- Pantalla de juego -->
-        <div id="game-screen" style="display: none;">
-            <div class="scoreboard">
-                <div class="current-player">Turno: <span id="current-player-name"></span></div>
-                <div class="scores" id="scores-container"></div>
-            </div>
-            
-            <div class="game-buttons">
-                <button onclick="loadGame('tabu')">Tabú (100 tarjetas)</button>
-                <button onclick="loadGame('trivia')">Trivia (100 preguntas)</button>
-                <button onclick="loadGame('memo')">Memo (50 pares)</button>
-            </div>
-            <div id="game-container"></div>
+        <div class="player-inputs" id="player-inputs-container">
+          <!-- Inputs dinámicos de jugadores -->
         </div>
-
-        <!-- Popup de turno -->
-        <div id="turn-popup" class="turn-popup">
-            <div class="turn-popup-content">
-                <h2>¡Es tu turno!</h2>
-                <p id="turn-player-name"></p>
-            </div>
-        </div>
+        <button onclick="startGame()">Comenzar</button>
+      </div>
     </div>
 
-    <!-- Contenedor para notificaciones no bloqueantes -->
-    <div id="notification-area"></div>
+    <!-- Pantalla de juego -->
+    <div id="game-screen" style="display: none;">
+      <div class="scoreboard">
+        <div class="current-player">Turno: <span id="current-player-name"></span></div>
+        <div class="scores" id="scores-container"></div>
+      </div>
 
-    <script src="app.js"></script>
+      <!-- Botones para elegir juego -->
+      <div class="game-buttons">
+        <button onclick="loadGame('tabu')">Tabú (100 tarjetas)</button>
+        <button onclick="loadGame('trivia')">Trivia (100 preguntas)</button>
+        <button onclick="loadGame('memo')">Memo (50 pares)</button>
+      </div>
+
+      <!-- Contenedor donde se inyectan Tabú, Trivia o Memo -->
+      <div id="game-container"></div>
+    </div>
+
+    <!-- Popup de turno -->
+    <div id="turn-popup" class="turn-popup">
+      <div class="turn-popup-content">
+        <h2>¡Es tu turno!</h2>
+        <p id="turn-player-name"></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Área de notificaciones no bloqueantes -->
+  <div id="notification-area"></div>
+
+  <!-- Script principal (con solo lógica de Memo incluida) -->
+  <script src="app.js"></script>
 </body>
 </html>
