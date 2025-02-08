@@ -1,28 +1,30 @@
-/* =========================
+/* ===========================================
    RESET y Layout General
-   ========================= */
+   =========================================== */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0; 
+  padding: 0; 
+  box-sizing: border-box;
 }
 
 body {
-    font-family: "Arial", sans-serif;
-    background: #f5f5f5;
-    padding: 20px;
+  font-family: "Arial", sans-serif;
+  background: #f5f5f5;
+  padding: 20px;
 }
 
 .container {
-    max-width: 800px;
-    margin: 0 auto;
-    background: white;
-    padding: 25px;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  margin: 0 auto;
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
-/* Barra superior para mostrar nombre de usuario y logout */
+/* ===========================================
+   BARRA SUPERIOR (user-info y logout)
+   =========================================== */
 .top-bar {
   display: flex;
   justify-content: flex-end;
@@ -37,7 +39,81 @@ body {
   font-weight: bold;
 }
 
-/* Estilo para la sección de jugadores */
+/* ===========================================
+   TÍTULO PRINCIPAL
+   =========================================== */
+h1 {
+  color: #2c3e50;
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: 2em;
+}
+
+/* ===========================================
+   SECCIÓN DE AUTENTICACIÓN (Registro/Login)
+   =========================================== */
+.auth-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  margin-bottom: 30px;
+  justify-content: center; 
+}
+
+.auth-box {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  min-width: 250px;
+}
+
+.auth-box h2 {
+  margin-bottom: 10px;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.auth-form input {
+  padding: 10px;
+  border: 2px solid #ddd;
+  border-radius: 5px;
+}
+
+/* ===========================================
+   BOTONES “MODERNOS” (Gradiente)
+   =========================================== */
+.modern-btn {
+  display: inline-block;
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #fff;
+  background: linear-gradient(135deg, #3498db 0%, #9b59b6 100%);
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  margin-top: 10px;
+}
+.modern-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+.modern-btn:active {
+  transform: scale(0.98);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* ===========================================
+   SECCIÓN DE JUGADORES
+   =========================================== */
 .player-setup {
   background: #f8f9fa;
   padding: 20px;
@@ -51,342 +127,333 @@ body {
   font-weight: bold;
 }
 
+.player-number select {
+  padding: 10px;
+  border-radius: 5px;
+  border: 2px solid #ddd;
+  margin-left: 10px;
+}
+
 .player-inputs {
   display: flex;
   gap: 10px;
   margin-bottom: 15px;
 }
 
-
-/* =========================
-   TÍTULOS PRINCIPALES
-   ========================= */
-h1 {
-    color: #2c3e50;
-    text-align: center;
-    margin-bottom: 25px;
-    font-size: 2em;
+.player-inputs input {
+  padding: 10px;
+  border: 2px solid #ddd;
+  border-radius: 5px;
 }
 
-/* =========================
-   SECCIÓN DE AUTENTICACIÓN
-   ========================= */
-.auth-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 30px;
-    margin-bottom: 30px;
-    justify-content: center;
-}
-
-.auth-box {
-    background: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-    min-width: 250px;
-}
-
-.auth-box h2 {
-    margin-bottom: 10px;
-}
-
-.auth-form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.auth-form input {
-    padding: 10px;
-    border: 2px solid #ddd;
-    border-radius: 5px;
-}
-
-/* =========================
-   BOTONES “MODERNOS” 
-   (Gradiente y hover animado)
-   ========================= */
-.modern-btn {
-    display: inline-block;
-    padding: 12px 24px;
-    font-size: 1rem;
-    font-weight: 500;
-    color: #fff;
-    background: linear-gradient(135deg, #3498db 0%, #9b59b6 100%);
-    border: none;
-    border-radius: 30px;
-    cursor: pointer;
-    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    margin-top: 10px;
-}
-
-.modern-btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-}
-
-.modern-btn:active {
-    transform: scale(0.98);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-/* =========================
-   SECCIÓN DE JUGADORES
-   ========================= */
-.player-number select {
-    padding: 10px;
-    border-radius: 5px;
-    border: 2px solid #ddd;
-}
-
-/* =========================
+/* ===========================================
    SECCIÓN SCOREBOARD
-   ========================= */
+   =========================================== */
 .scoreboard {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    margin-bottom: 15px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: 15px;
 }
 
 .current-player {
-    font-size: 1.2em;
-    font-weight: bold;
-    color: #2c3e50;
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #2c3e50;
 }
 
 .scores {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .score-item {
-    background: #e3f2fd;
-    padding: 8px 12px;
-    border-radius: 5px;
-    text-align: center;
+  background: #e3f2fd;
+  padding: 8px 12px;
+  border-radius: 5px;
+  text-align: center;
 }
 
-/* =========================
-   SECCIÓN DE BOTONES DEL JUEGO 
-   (Tabú, Trivia, Memo)
-   ========================= */
+/* ===========================================
+   BOTONES DEL JUEGO 
+   =========================================== */
 .game-buttons {
-    display: flex;
-    gap: 15px;
-    margin-bottom: 20px;
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
 }
 
-/* =========================
+/* ===========================================
    CONTENEDOR DE JUEGO
-   ========================= */
+   =========================================== */
 #game-screen {
-    display: none;
+  display: none;
 }
 
 #game-container {
-    min-height: 400px;
-    background: #f9f9f9;
-    border: 1px solid #eee;
-    border-radius: 8px;
-    padding: 20px;
+  min-height: 400px;
+  background: #f9f9f9;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 20px;
 }
 
-/* =========================
+/* ===========================================
    POPUP DE TURNO
-   ========================= */
+   =========================================== */
 .turn-popup {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
+  display: none;
+  position: fixed;
+  top: 0; 
+  left: 0;
+  width: 100%; 
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  justify-content: center; 
+  align-items: center;
+  z-index: 1000;
 }
-
 .turn-popup-content {
-    background: white;
-    padding: 30px;
-    border-radius: 12px;
-    text-align: center;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
-
 .turn-popup-content h2 {
-    font-size: 2em;
-    color: #2c3e50;
-    margin-bottom: 10px;
+  font-size: 2em;
+  color: #2c3e50;
+  margin-bottom: 10px;
 }
 
-/* =========================
+/* ===========================================
    NOTIFICACIONES
-   ========================= */
+   =========================================== */
 #notification-area {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    z-index: 1100;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1100;
 }
-
 .notification-popup {
-    background: #3c763d;
-    color: #fff;
-    padding: 10px 20px;
-    margin-top: 10px;
-    border-radius: 6px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-    font-size: 1em;
-    animation: fadeSlideIn 0.4s forwards;
+  background: #3c763d;
+  color: #fff;
+  padding: 10px 20px;
+  margin-top: 10px;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  font-size: 1em;
+  animation: fadeSlideIn 0.4s forwards;
 }
-
 .notification-popup.error {
-    background: #a94442;
+  background: #a94442;
 }
 
 @keyframes fadeSlideIn {
-    from {
-        opacity: 0;
-        transform: translateX(50px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
-/* =========================
-   ESTILOS PARA TABÚ
-   ========================= */
+/* ===========================================
+   TABÚ
+   =========================================== */
 .tabu-card {
-    background: #fff;
-    padding: 25px;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    max-width: 500px;
-    margin: 0 auto;
+  background: #fff;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.tabu-card h2 {
+  margin-bottom: 10px;
+  font-size: 1.5em;
 }
 
 .prohibidas-box {
-    background: #f8d7da;
-    padding: 15px;
-    border-radius: 8px;
-    margin: 20px 0;
+  background: #f8d7da;
+  padding: 15px;
+  border-radius: 8px;
+  margin: 20px 0;
+}
+
+.prohibidas-box h4 {
+  margin-bottom: 8px;
 }
 
 .violation-check {
-    display: inline-block;
-    margin: 8px;
-    padding: 8px 12px;
-    background: #fff;
-    border-radius: 20px;
-    cursor: pointer;
+  display: inline-block;
+  margin: 8px;
+  padding: 8px 12px;
+  background: #fff;
+  border-radius: 20px;
+  cursor: pointer;
 }
 
 .tabu-controls {
-    display: grid;
-    gap: 10px;
-    margin: 20px 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin: 20px 0;
 }
 
-/* =========================
-   ESTILOS PARA TRIVIA
-   ========================= */
+.tabu-controls button {
+  /* Reutilizamos estilo .modern-btn */
+  background: linear-gradient(135deg, #3498db 0%, #9b59b6 100%);
+  color: #fff;
+  border: none;
+  border-radius: 30px;
+  padding: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  text-align: center;
+}
+.tabu-controls button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+.tabu-controls button:active {
+  transform: scale(0.98);
+}
+
+.guesser-selection {
+  margin-top: 15px;
+  padding: 15px;
+  background: #e2f3e8;
+  border-radius: 8px;
+}
+
+.guesser-selection button {
+  background: linear-gradient(135deg, #3498db 0%, #9b59b6 100%);
+  color: #fff;
+  border: none;
+  border-radius: 30px;
+  margin: 5px;
+  padding: 8px 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.guesser-selection button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+.guesser-selection button:active {
+  transform: scale(0.98);
+}
+
+/* ===========================================
+   TRIVIA
+   =========================================== */
 .card {
-    background: white;
-    padding: 20px;
-    margin: 15px 0;
-    border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  background: white;
+  padding: 20px;
+  margin: 15px 0;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
 }
 
 .card h3 {
-    margin-bottom: 15px;
+  margin-bottom: 15px;
+  font-size: 1.3em;
 }
 
 .opciones button {
-    margin-right: 10px;
-    margin-bottom: 10px;
-    /* Recibe el estilo base del .modern-btn si le agregas esa clase, 
-     o lo dejas así para que herede sólo el color actual. */
+  background: linear-gradient(135deg, #3498db 0%, #9b59b6 100%);
+  color: #fff;
+  border: none;
+  border-radius: 30px;
+  margin: 5px 10px 10px 0;
+  padding: 8px 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.opciones button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+.opciones button:active {
+  transform: scale(0.98);
 }
 
-/* =========================
-   ESTILOS PARA MEMO
-   ========================= */
+/* ===========================================
+   MEMO
+   =========================================== */
 .memo-intro {
-    text-align: center;
-    margin-bottom: 20px;
-    color: #555;
-    line-height: 1.4em;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #555;
+  line-height: 1.4em;
 }
 
 .memo-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 120px);
-    gap: 15px;
-    justify-content: center;
-    margin-top: 10px;
+  display: grid;
+  grid-template-columns: repeat(4, 120px);
+  gap: 15px;
+  justify-content: center;
+  margin-top: 10px;
 }
 
 .memo-card {
-    width: 120px;
-    height: 150px;
-    background: #3498db;
-    border-radius: 8px;
-    position: relative;
-    cursor: pointer;
-    perspective: 600px;
-    transition: transform 0.3s;
+  width: 120px;
+  height: 150px;
+  background: #3498db;
+  border-radius: 8px;
+  position: relative;
+  cursor: pointer;
+  perspective: 600px;
+  transition: transform 0.3s;
 }
 
 .memo-card:hover {
-    transform: scale(1.05);
+  transform: scale(1.05);
 }
 
 .memo-card .front,
 .memo-card .back {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    border-radius: 8px;
-    top: 0;
-    left: 0;
-    backface-visibility: hidden;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    transition: transform 0.5s;
-    color: #fff;
-    padding: 10px;
-    text-align: center;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  border-radius: 8px;
+  top: 0;
+  left: 0;
+  backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.5s;
+  color: #fff;
+  padding: 10px;
+  text-align: center;
 }
 
 .memo-card .front {
-    background: #2980b9;
-    transform: rotateY(0deg);
-    font-size: 1.6em;
+  background: #2980b9;
+  transform: rotateY(0deg);
+  font-size: 1.6em;
 }
 
 .memo-card .back {
-    background: #27ae60;
-    transform: rotateY(180deg);
-    font-size: 0.85em;
+  background: #27ae60;
+  transform: rotateY(180deg);
+  font-size: 0.85em;
 }
 
 .memo-card.flipped .front {
-    transform: rotateY(180deg);
+  transform: rotateY(180deg);
 }
 
 .memo-card.flipped .back {
-    transform: rotateY(0deg);
+  transform: rotateY(0deg);
 }
