@@ -1,10 +1,11 @@
 // Datos reales de juegos bíblicos (NVI)
 const bibleData = {
+    // TABU SIN DUPLICADOS Y CON CORRECCIÓN DE "TÚNICA"
     tabu: [
-        { 
+        {
             palabra: "Jonás", 
             prohibidas: ["Pez", "Nínive", "Tormenta"], 
-            referencia: "Jonás 1:1-17" 
+            referencia: "Jonás 1:1-17"
         },
         { 
             palabra: "Gedeón", 
@@ -117,8 +118,9 @@ const bibleData = {
             referencia: "Mateo 1:18-25"
         },
         {
+            // Se corrige "Coatas" -> "Túnica"
             palabra: "José (hijo de Jacob)",
-            prohibidas: ["Egipto", "Coatas", "Sueños"],
+            prohibidas: ["Egipto", "Túnica", "Sueños"],
             referencia: "Génesis 37-50"
         },
         {
@@ -225,11 +227,6 @@ const bibleData = {
             palabra: "Silas",
             prohibidas: ["Pablo", "Cárcel", "Canto"],
             referencia: "Hechos 16:25-40"
-        },
-        {
-            palabra: "Esteban",
-            prohibidas: ["Mártir", "Hechos", "Piedras"],
-            referencia: "Hechos 7:54-60"
         },
         {
             palabra: "Félix",
@@ -440,80 +437,10 @@ const bibleData = {
             palabra: "Zorobabel",
             prohibidas: ["Templo", "Reconstrucción", "Esdras"],
             referencia: "Esdras 3:1-13"
-        },
-        {
-            palabra: "Esdras",
-            prohibidas: ["Sacerdote", "Ley", "Templo"],
-            referencia: "Esdras 7:1-10"
-        },
-        {
-            palabra: "Nehemías",
-            prohibidas: ["Muro", "Jerusalén", "Reconstrucción"],
-            referencia: "Nehemías 1:1-11"
-        },
-        {
-            palabra: "Caleb",
-            prohibidas: ["Espía", "Canaán", "Herencia"],
-            referencia: "Números 13-14"
-        },
-        {
-            palabra: "Josué",
-            prohibidas: ["Canaán", "Jericó", "Conquista"],
-            referencia: "Josué 1:1-9"
-        },
-        {
-            palabra: "Debora",
-            prohibidas: ["Jueces", "Cántico", "Barac"],
-            referencia: "Jueces 4-5"
-        },
-        {
-            palabra: "Jael",
-            prohibidas: ["Estaca", "Sísara", "Tienda"],
-            referencia: "Jueces 4:17-22"
-        },
-        {
-            palabra: "Raquel",
-            prohibidas: ["Jacob", "Esteril", "Benjamín"],
-            referencia: "Génesis 29-35"
-        },
-        {
-            palabra: "Lea",
-            prohibidas: ["Jacob", "Hijos", "Ojos"],
-            referencia: "Génesis 29-30"
-        },
-        {
-            palabra: "Rebeca",
-            prohibidas: ["Isaac", "Esaú", "Jacob"],
-            referencia: "Génesis 24-27"
-        },
-        {
-            palabra: "Sara",
-            prohibidas: ["Abraham", "Isaac", "Risa"],
-            referencia: "Génesis 17-23"
-        },
-        {
-            palabra: "Lot",
-            prohibidas: ["Sodoma", "Esposa", "Sal"],
-            referencia: "Génesis 19:1-29"
-        },
-        {
-            palabra: "Melquisedec",
-            prohibidas: ["Sacerdote", "Pan", "Vino"],
-            referencia: "Génesis 14:18-20"
-        },
-        {
-            palabra: "Enoc",
-            prohibidas: ["Caminó con Dios", "Arrebatado", "Génesis"],
-            referencia: "Génesis 5:21-24"
-        },
-        {
-            palabra: "Caín",
-            prohibidas: ["Abel", "Asesinato", "Marca"],
-            referencia: "Génesis 4:1-16"
-        },
+        }
     ],
 
- trivia = [
+ trivia: [
   // Pregunta 1
   {
     pregunta: "¿Quién construyó el arca?",
@@ -1410,7 +1337,7 @@ memo: [
 ]
 };
 
-// ====================================================
+     // ====================================================
 // LÓGICA MULTIJUGADOR
 // ====================================================
 let players = [];
@@ -1492,6 +1419,24 @@ function showTurnPopup(playerName) {
 }
 
 // ====================================================
+// FUNCIONES DE NOTIFICACIÓN NO BLOQUEANTE
+// ====================================================
+function showNotification(message, isError = false) {
+    const notificationArea = document.getElementById('notification-area');
+    const notif = document.createElement('div');
+    notif.classList.add('notification-popup');
+    if (isError) {
+        notif.classList.add('error');
+    }
+    notif.textContent = message;
+    notificationArea.appendChild(notif);
+
+    setTimeout(() => {
+        notificationArea.removeChild(notif);
+    }, 3000);
+}
+
+// ====================================================
 // LÓGICA DEL TABÚ
 // ====================================================
 function loadTabuCard() {
@@ -1529,7 +1474,7 @@ function loadTabuCard() {
         </div>
     `;
     
-    // Inicializar selección
+    // Inicializar selección de violaciones
     selectedViolations = [];
     document.querySelectorAll('.violation-check input').forEach(checkbox => {
         checkbox.addEventListener('change', (e) => {
@@ -1549,19 +1494,20 @@ function handleTabuSuccess() {
     
     players[currentPlayerIndex].score += Math.max(totalPoints, 0);
     
-    // Mostrar resultado
-    alert(`${players[currentPlayerIndex].name} obtiene ${totalPoints} puntos!`);
+    showNotification(
+        `${players[currentPlayerIndex].name} obtiene ${Math.max(totalPoints, 0)} puntos!`
+    );
     nextTabuCard();
 }
 
 function handleTabuFailure() {
-    alert("❌ Nadie adivinó la palabra");
+    showNotification("❌ Nadie adivinó la palabra", true);
     nextTabuCard();
 }
 
 function assignGuesserPoints(playerIndex) {
     players[playerIndex].score += 5; // Puntos extra por adivinar
-    alert(`⭐ ${players[playerIndex].name} gana 5 puntos por adivinar!`);
+    showNotification(`⭐ ${players[playerIndex].name} gana 5 puntos por adivinar!`);
     document.getElementById('guesser-section').style.display = 'none';
 }
 
@@ -1598,9 +1544,10 @@ function handleTriviaAnswer(questionIndex, selectedOption) {
     
     if (correct) {
         players[currentPlayerIndex].score += 10;
-        alert(`✅ Correcto! +10 puntos para ${players[currentPlayerIndex].name}`);
+        showNotification(`✅ Correcto! +10 puntos para ${players[currentPlayerIndex].name}`);
     } else {
-        alert(`❌ Incorrecto. Respuesta correcta: ${bibleData.trivia[questionIndex].opciones[bibleData.trivia[questionIndex].respuesta]}`);
+        const correctAnswer = bibleData.trivia[questionIndex].opciones[bibleData.trivia[questionIndex].respuesta];
+        showNotification(`❌ Incorrecto. La respuesta era: ${correctAnswer}`, true);
     }
     
     currentTriviaIndex = (currentTriviaIndex + 1) % bibleData.trivia.length;
@@ -1609,12 +1556,16 @@ function handleTriviaAnswer(questionIndex, selectedOption) {
 }
 
 // ====================================================
-// LÓGICA DE MEMO
+// LÓGICA DE MEMO (CON TURNOS Y PUNTOS)
 // ====================================================
 function loadMemoGame() {
     const container = document.getElementById("game-container");
     const memoPairs = shuffleArray([...bibleData.memo.flatMap(pair => [pair.pasaje1, pair.pasaje2])]);
-    
+
+    // Reiniciar estado
+    flippedCards = [];
+    matchedPairs = 0;
+
     container.innerHTML = `
         <div class="memo-grid">
             ${memoPairs.map(text => `
@@ -1628,6 +1579,7 @@ function loadMemoGame() {
 }
 
 function flipCard(card) {
+    // Permitir voltear hasta 2 cartas
     if (flippedCards.length < 2 && !card.classList.contains('flipped')) {
         card.classList.add('flipped');
         flippedCards.push(card);
@@ -1643,20 +1595,33 @@ function checkForMatch() {
     const text1 = card1.querySelector('.back').textContent;
     const text2 = card2.querySelector('.back').textContent;
 
-    if (bibleData.memo.some(pair => 
-        (pair.pasaje1 === text1 && pair.pasaje2 === text2) || 
+    const isMatch = bibleData.memo.some(pair =>
+        (pair.pasaje1 === text1 && pair.pasaje2 === text2) ||
         (pair.pasaje1 === text2 && pair.pasaje2 === text1)
-    )) {
+    );
+
+    if (isMatch) {
+        // Suma puntos al jugador actual
+        players[currentPlayerIndex].score += 5;
         matchedPairs++;
+        showNotification(`¡Par encontrado! +5 puntos para ${players[currentPlayerIndex].name}`);
+        
         flippedCards = [];
+
+        // Comprobar si se encontraron todos los pares
         if (matchedPairs === bibleData.memo.length) {
-            alert(`🎉 ¡Felicidades! Han encontrado todos los pares.`);
+            showNotification(`🎉 ¡Felicidades! Han encontrado todos los pares.`);
         }
+        // OPCIONAL: Si quieres que el mismo jugador continúe cuando acierta, no hacemos nextTurn() aquí.
+        // nextTurn(); // Descomenta si quieres que pase el turno tras acertar
     } else {
+        // Esperar un segundo y voltear
         setTimeout(() => {
             card1.classList.remove('flipped');
             card2.classList.remove('flipped');
             flippedCards = [];
+            // Si falla, pasa el turno
+            nextTurn();
         }, 1000);
     }
 }
@@ -1680,14 +1645,11 @@ function loadGame(gameType) {
             currentTabuIndex = 0;
             loadTabuCard();
             break;
-
         case "trivia":
             currentTriviaIndex = 0;
             loadTriviaQuestion();
             break;
-
         case "memo":
-            matchedPairs = 0;
             loadMemoGame();
             break;
     }
