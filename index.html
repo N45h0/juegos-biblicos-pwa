@@ -1,124 +1,133 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-  <meta charset="UTF-8">
-  <title>Juegos Bíblicos Multijugador</title>
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <title>Juegos Bíblicos Multijugador</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
 
-  <div class="container">
-    <!-- Pantalla de inicio -->
-    <div id="start-screen">
-      <h1>📖 Juegos Bíblicos</h1>
-
-      <!-- Sección de Autenticación -->
-      <div class="auth-container">
-
-        <!-- Registro -->
-        <div class="auth-box">
-          <h2>Registro</h2>
-          <form id="register-form" class="auth-form">
-            <input type="email" id="register-email" placeholder="Email" required />
-            <input type="password" id="register-pass" placeholder="Contraseña" required />
-            <button type="submit" class="modern-btn">Registrarse</button>
-          </form>
-        </div>
-
-        <!-- Iniciar Sesión -->
-        <div class="auth-box">
-          <h2>Iniciar Sesión</h2>
-          <form id="login-form" class="auth-form">
-            <input type="email" id="login-email" placeholder="Email" required />
-            <input type="password" id="login-pass" placeholder="Contraseña" required />
-            <button type="submit" class="modern-btn">Iniciar Sesión</button>
-          </form>
-          <button id="google-btn" class="modern-btn">Iniciar con Google</button>
-          <button onclick="logout()" class="modern-btn">Cerrar sesión</button>
-        </div>
-      </div>
-
-      <!-- Sección para configurar jugadores (SOLO visible si el usuario está logueado) -->
-      <div id="player-setup-section" style="display: none;">
-        <h3>Configuración de jugadores</h3>
-        <div class="player-number">
-          <label>Número de jugadores:</label>
-          <select id="player-count" onchange="createPlayerInputs(this.value)">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-          </select>
-        </div>
-        <div class="player-inputs" id="player-inputs-container">
-          <!-- Inputs dinámicos de jugadores -->
-        </div>
-        <button onclick="startGame()" class="modern-btn">Comenzar</button>
-      </div>
+    <!-- Barra superior (muestra "Hola, email" si logueado) -->
+    <div class="top-bar">
+        <div id="user-info" class="user-info"></div>
+        <button onclick="logout()" class="modern-btn" id="logout-btn" style="display: none;">
+            Cerrar sesión
+        </button>
     </div>
 
-    <!-- Pantalla de juego (oculta inicialmente) -->
-    <div id="game-screen" style="display: none;">
-      <div class="scoreboard">
-        <div class="current-player">
-          Turno: <span id="current-player-name"></span>
+    <div class="container">
+
+        <!-- Pantalla de inicio -->
+        <div id="start-screen">
+            <h1>📖 Juegos Bíblicos</h1>
+
+            <!-- Sección de Autenticación -->
+            <div class="auth-container">
+                <!-- Registro -->
+                <div class="auth-box">
+                    <h2>Registro</h2>
+                    <form id="register-form" class="auth-form">
+                        <input type="email" id="register-email" placeholder="Email" required />
+                        <input type="password" id="register-pass" placeholder="Contraseña" required />
+                        <button type="submit" class="modern-btn">Registrarse</button>
+                    </form>
+                </div>
+
+                <!-- Iniciar Sesión -->
+                <div class="auth-box">
+                    <h2>Iniciar Sesión</h2>
+                    <form id="login-form" class="auth-form">
+                        <input type="email" id="login-email" placeholder="Email" required />
+                        <input type="password" id="login-pass" placeholder="Contraseña" required />
+                        <button type="submit" class="modern-btn">Iniciar Sesión</button>
+                    </form>
+                    <button id="google-btn" class="modern-btn">Iniciar con Google</button>
+                </div>
+            </div>
+
+            <!-- Sección para configurar jugadores (SOLO visible si el usuario está logueado) -->
+            <div class="player-setup" id="player-setup-section" style="display: none;">
+                <h3>Configuración de jugadores</h3>
+                <div class="player-number">
+                    <label>Número de jugadores:</label>
+                    <select id="player-count" onchange="createPlayerInputs(this.value)">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                    </select>
+                </div>
+                <div class="player-inputs" id="player-inputs-container">
+                    <!-- Inputs dinámicos de jugadores -->
+                </div>
+                <button onclick="startGame()" class="modern-btn">Comenzar</button>
+            </div>
         </div>
-        <div class="scores" id="scores-container"></div>
-      </div>
 
-      <!-- Botones para elegir juego -->
-      <div class="game-buttons">
-        <button class="modern-btn" onclick="loadGame('tabu')">Tabú (100 tarjetas)</button>
-        <button class="modern-btn" onclick="loadGame('trivia')">Trivia (100 preguntas)</button>
-        <button class="modern-btn" onclick="loadGame('memo')">Memo (50 pares)</button>
-      </div>
+        <!-- Pantalla de juego (oculta inicialmente) -->
+        <div id="game-screen" style="display: none;">
+            <div class="scoreboard">
+                <div class="current-player">
+                    Turno: <span id="current-player-name"></span>
+                </div>
+                <div class="scores" id="scores-container"></div>
+            </div>
 
-      <!-- Contenedor donde se inyectan los minijuegos -->
-      <div id="game-container"></div>
+            <!-- Botones para elegir juego -->
+            <div class="game-buttons">
+                <button class="modern-btn" onclick="loadGame('tabu')">Tabú (100 tarjetas)</button>
+                <button class="modern-btn" onclick="loadGame('trivia')">Trivia (100 preguntas)</button>
+                <button class="modern-btn" onclick="loadGame('memo')">Memo (50 pares)</button>
+            </div>
+
+            <!-- Contenedor donde se inyectan Tabú, Trivia o Memo -->
+            <div id="game-container"></div>
+        </div>
+
+        <!-- Popup de turno -->
+        <div id="turn-popup" class="turn-popup">
+            <div class="turn-popup-content">
+                <h2>¡Es tu turno!</h2>
+                <p id="turn-player-name"></p>
+            </div>
+        </div>
     </div>
 
-    <!-- Popup de turno -->
-    <div id="turn-popup" class="turn-popup">
-      <div class="turn-popup-content">
-        <h2>¡Es tu turno!</h2>
-        <p id="turn-player-name"></p>
-      </div>
-    </div>
-  </div>
+    <!-- Área de notificaciones no bloqueantes -->
+    <div id="notification-area"></div>
 
-  <!-- Área de notificaciones no bloqueantes -->
-  <div id="notification-area"></div>
+    <!-- Firebase App (compat) -->
+    <script src="https://www.gstatic.com/firebasejs/9.17.2/firebase-app-compat.js"></script>
+    <!-- Firebase Auth (compat) -->
+    <script src="https://www.gstatic.com/firebasejs/9.17.2/firebase-auth-compat.js"></script>
 
-  <!-- Scripts de Firebase “compat” -->
-  <script src="https://www.gstatic.com/firebasejs/9.17.2/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.17.2/firebase-auth-compat.js"></script>
+    <script>
+        // Tu configuración de Firebase
+        // (Usa la misma que tenías en tu snippet, pero sin "type=module")
+        const firebaseConfig = {
+            apiKey: "AIzaSyCIoeE2vmY6USqFi-osi7kQVu4-Or_JJsE",
+            authDomain: "biblegames-6b936.firebaseapp.com",
+            projectId: "biblegames-6b936",
+            storageBucket: "biblegames-6b936.firebasestorage.app",
+            messagingSenderId: "343894525738",
+            appId: "1:343894525738:web:a99c3a460aa0c76a1a8053",
+            measurementId: "G-9HZELG76YK"
+        };
 
-  <script>
-    // Tu configuración de Firebase
-    // (Usa la misma que tenías en tu snippet, pero sin "type=module")
-    const firebaseConfig = {
-      apiKey: "AIzaSyCIoeE2vmY6USqFi-osi7kQVu4-Or_JJsE",
-      authDomain: "biblegames-6b936.firebaseapp.com",
-      projectId: "biblegames-6b936",
-      storageBucket: "biblegames-6b936.firebasestorage.app",
-      messagingSenderId: "343894525738",
-      appId: "1:343894525738:web:a99c3a460aa0c76a1a8053",
-      measurementId: "G-9HZELG76YK"
-    };
+        // Inicializar con el objeto global `firebase`
+        firebase.initializeApp(firebaseConfig);
+        // Asignar la variable auth
+        const auth = firebase.auth();
+    </script>
 
-    // Inicializa Firebase con el objeto global “firebase”
-    firebase.initializeApp(firebaseConfig);
-
-    // Crea la instancia de autenticación
-    // (auth será usada en app.js)
-    const auth = firebase.auth();
-  </script>
-
-  <!-- Script principal de tu proyecto -->
-  <script src="app.js"></script>
+    <!-- Tu archivo app.js (con la lógica de minijuegos, login, etc.) -->
+    <script src="app.js"></script>
 </body>
+
 </html>
