@@ -1410,10 +1410,10 @@ function showTurnPopup(playerName) {
     playerNameElement.textContent = playerName;
     popup.style.display = 'flex';
 
-    // Ocultar el popup después de 3 segundos
+    // Ocultar el popup después de 1.5 segundos
     setTimeout(() => {
         popup.style.display = 'none';
-    }, 3000);
+    }, 1500);
 }
 
 // ====================================================
@@ -1501,6 +1501,8 @@ function handleTabuSuccess() {
 function handleTabuFailure() {
     showNotification("❌ Nadie adivinó la palabra", true);
     nextTabuCard();
+    // Al fallar, se pasa el turno
+    nextTurn();
 }
 
 function assignGuesserPoints(playerIndex) {
@@ -1512,7 +1514,6 @@ function assignGuesserPoints(playerIndex) {
 function nextTabuCard() {
     currentTabuIndex = (currentTabuIndex + 1) % bibleData.tabu.length;
     loadTabuCard();
-    nextTurn();
 }
 
 // ====================================================
@@ -1538,20 +1539,30 @@ function loadTriviaQuestion() {
 }
 
 function handleTriviaAnswer(questionIndex, selectedOption) {
-    const correct = bibleData.trivia[questionIndex].respuesta === selectedOption;
+  const correct = bibleData.trivia[questionIndex].respuesta === selectedOption;
+  
+  if (correct) {
+    players[currentPlayerIndex].score += 10;
+    showNotification(`✅ Correcto! +10 puntos para ${players[currentPlayerIndex].name}`);
 
-    if (correct) {
-        players[currentPlayerIndex].score += 10;
-        showNotification(`✅ Correcto! +10 puntos para ${players[currentPlayerIndex].name}`);
-    } else {
-        const correctAnswer = bibleData.trivia[questionIndex].opciones[bibleData.trivia[questionIndex].respuesta];
-        showNotification(`❌ Incorrecto. La respuesta era: ${correctAnswer}`, true);
-    }
+    // PASO IMPORTANTE: NO cambiar de turno
+    // nextTurn(); <-- Esto se elimina si quieres que siga el mismo jugador
 
-    currentTriviaIndex = (currentTriviaIndex + 1) % bibleData.trivia.length;
+  } else {
+    const correctAnswer = bibleData.trivia[questionIndex].opciones[
+      bibleData.trivia[questionIndex].respuesta
+    ];
+    showNotification(`❌ Incorrecto. La respuesta era: ${correctAnswer}`, true);
+
+    // Al fallar, SÍ se cambia de turno
     nextTurn();
-    loadTriviaQuestion();
+  }
+
+  // Cargar siguiente pregunta
+  currentTriviaIndex = (currentTriviaIndex + 1) % bibleData.trivia.length;
+  loadTriviaQuestion();
 }
+
 
 // ====================================================
 // LÓGICA DE MEMO (CON TURNOS Y PUNTOS)
