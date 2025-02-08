@@ -1175,349 +1175,349 @@ const bibleData = {
         }
     ],
 
-memo: [
-  {
-    tema: "Salvación por fe",
-    pasaje1: {
-      cita: "Efesios 2:8-9",
-      texto: "Porque por gracia ustedes han sido salvados mediante la fe..."
-    },
-    pasaje2: {
-      cita: "Romanos 3:28",
-      texto: "Sostenemos, pues, que el hombre es justificado por la fe..."
-    }
-  },
-  {
-    tema: "Amor al prójimo",
-    pasaje1: {
-      cita: "Mateo 22:39",
-      texto: "Ama a tu prójimo como a ti mismo."
-    },
-    pasaje2: {
-      cita: "Levítico 19:18",
-      texto: "No te vengarás ni guardarás rencor... amarás a tu prójimo."
-    }
-  },
-  {
-    tema: "Resurrección",
-    pasaje1: {
-      cita: "1 Corintios 15:20",
-      texto: "Mas ahora Cristo ha resucitado de los muertos..."
-    },
-    pasaje2: {
-      cita: "Juan 11:25",
-      texto: "Yo soy la resurrección y la vida. El que cree en mí, vivirá..."
-    }
-  },
-  {
-    tema: "Perdón",
-    pasaje1: {
-      cita: "Mateo 6:14",
-      texto: "Si perdonan a otros sus ofensas, también los perdonará a ustedes su Padre..."
-    },
-    pasaje2: {
-      cita: "Colosenses 3:13",
-      texto: "De modo que se toleren unos a otros y se perdonen si alguno tiene queja..."
-    }
-  },
-  {
-    tema: "Creación",
-    pasaje1: {
-      cita: "Génesis 1:1",
-      texto: "En el principio Dios creó los cielos y la tierra."
-    },
-    pasaje2: {
-      cita: "Juan 1:3",
-      texto: "Todas las cosas fueron hechas por medio de él, y sin él nada fue hecho..."
-    }
-  },
-  {
-    tema: "Pecado original",
-    pasaje1: {
-      cita: "Romanos 3:23",
-      texto: "Pues todos han pecado y están privados de la gloria de Dios..."
-    },
-    pasaje2: {
-      cita: "Romanos 6:23",
-      texto: "La paga del pecado es muerte, mientras que la dádiva de Dios es vida eterna..."
-    }
-  },
-  {
-    tema: "Fe de Abraham",
-    pasaje1: {
-      cita: "Génesis 15:6",
-      texto: "Abram creyó al Señor, y el Señor se lo reconoció como justicia."
-    },
-    pasaje2: {
-      cita: "Romanos 4:3",
-      texto: "Abraham creyó a Dios, y esto se le tomó en cuenta como justicia."
-    }
-  },
-  {
-    tema: "Segunda Venida",
-    pasaje1: {
-      cita: "Hechos 1:11",
-      texto: "Este mismo Jesús, que ha sido llevado de entre ustedes al cielo, vendrá otra vez..."
-    },
-    pasaje2: {
-      cita: "Apocalipsis 22:20",
-      texto: "El que da testimonio de estas cosas dice: 'Sí, vengo pronto'. Amén. ¡Ven, Señor Jesús!"
-    }
-  },
-  {
-    tema: "Fidelidad de Dios",
-    pasaje1: {
-      cita: "Lamentaciones 3:22-23",
-      texto: "Por la misericordia del Señor no hemos sido consumidos... grandes son su fidelidad."
-    },
-    pasaje2: {
-      cita: "2 Timoteo 2:13",
-      texto: "Si somos infieles, él sigue siendo fiel, porque no puede negarse a sí mismo."
-    }
-  },
-  {
-    tema: "Nueva vida en Cristo",
-    pasaje1: {
-      cita: "2 Corintios 5:17",
-      texto: "Si alguno está en Cristo, nueva criatura es..."
-    },
-    pasaje2: {
-      cita: "Romanos 6:4",
-      texto: "Fuimos sepultados con él en su muerte... para que anduviéramos en vida nueva."
-    }
-  },
-  {
-    tema: "El amor de Dios",
-    pasaje1: {
-      cita: "Juan 3:16",
-      texto: "Porque tanto amó Dios al mundo que dio a su Hijo unigénito..."
-    },
-    pasaje2: {
-      cita: "1 Juan 4:9",
-      texto: "Así manifestó Dios su amor entre nosotros: en que envió a su Hijo unigénito al mundo..."
-    }
-  },
-  {
-    tema: "El fruto del Espíritu",
-    pasaje1: {
-      cita: "Gálatas 5:22-23",
-      texto: "El fruto del Espíritu es amor, alegría, paz, paciencia..."
-    },
-    pasaje2: {
-      cita: "Efesios 5:9",
-      texto: "El fruto de la luz consiste en toda bondad, justicia y verdad."
-    }
-  },
-  {
-    tema: "La oración",
-    pasaje1: {
-      cita: "Mateo 6:9-13",
-      texto: "Ustedes deben orar así: 'Padre nuestro que estás en el cielo...'"
-    },
-    pasaje2: {
-      cita: "Santiago 5:16",
-      texto: "La oración del justo es poderosa y eficaz."
-    }
-  },
-  {
-    tema: "La humildad",
-    pasaje1: {
-      cita: "Filipenses 2:3",
-      texto: "No hagan nada por egoísmo... sean humildes y consideren a los demás como superiores."
-    },
-    pasaje2: {
-      cita: "1 Pedro 5:6",
-      texto: "Humíllense, pues, bajo la poderosa mano de Dios, para que él los exalte a su debido tiempo."
-    }
-  },
-  {
-    tema: "Confianza en Dios",
-    pasaje1: {
-      cita: "Proverbios 3:5-6",
-      texto: "Confía en el Señor con todo tu corazón... él enderezará tus sendas."
-    },
-    pasaje2: {
-      cita: "Salmos 37:5",
-      texto: "Encomienda al Señor tu camino; confía en él, y él actuará."
-    }
-  },
-  {
-    tema: "Consuelo en la aflicción",
-    pasaje1: {
-      cita: "Salmos 34:18",
-      texto: "El Señor está cerca de los quebrantados de corazón..."
-    },
-    pasaje2: {
-      cita: "2 Corintios 1:3-4",
-      texto: "Dios nos consuela en todas nuestras tribulaciones, para que con ese mismo consuelo..."
-    }
-  },
-  {
-    tema: "Obediencia a Dios",
-    pasaje1: {
-      cita: "Juan 14:15",
-      texto: "Si ustedes me aman, obedecerán mis mandamientos."
-    },
-    pasaje2: {
-      cita: "1 Juan 5:3",
-      texto: "En esto consiste el amor a Dios: en que obedezcamos sus mandamientos."
-    }
-  },
-  {
-    tema: "La gracia de Dios",
-    pasaje1: {
-      cita: "Tito 2:11",
-      texto: "En verdad, Dios ha manifestado a toda la humanidad su gracia..."
-    },
-    pasaje2: {
-      cita: "2 Corintios 12:9",
-      texto: "Te basta con mi gracia, pues mi poder se perfecciona en la debilidad."
-    }
-  },
-  {
-    tema: "Sabiduría Divina",
-    pasaje1: {
-      cita: "Santiago 1:5",
-      texto: "Si a alguno de ustedes le falta sabiduría, pídasela a Dios..."
-    },
-    pasaje2: {
-      cita: "Proverbios 9:10",
-      texto: "El temor del Señor es el principio de la sabiduría..."
-    }
-  },
-  {
-    tema: "Arrepentimiento",
-    pasaje1: {
-      cita: "Hechos 3:19",
-      texto: "Por tanto, para que sean borrados sus pecados, arrepiéntanse y vuélvanse a Dios..."
-    },
-    pasaje2: {
-      cita: "Lucas 13:3",
-      texto: "Si no se arrepienten, todos perecerán igualmente."
-    }
-  },
-  {
-    tema: "Libertad en Cristo",
-    pasaje1: {
-      cita: "Gálatas 5:1",
-      texto: "Cristo nos libertó para que vivamos en libertad..."
-    },
-    pasaje2: {
-      cita: "Juan 8:36",
-      texto: "Así que, si el Hijo los libera, serán ustedes verdaderamente libres."
-    }
-  },
-  {
-    tema: "El Reino de Dios",
-    pasaje1: {
-      cita: "Mateo 6:33",
-      texto: "Busquen primeramente el reino de Dios y su justicia..."
-    },
-    pasaje2: {
-      cita: "Romanos 14:17",
-      texto: "El reino de Dios no es cuestión de comidas o bebidas, sino de justicia, paz y gozo..."
-    }
-  },
-  {
-    tema: "La armadura de Dios",
-    pasaje1: {
-      cita: "Efesios 6:11",
-      texto: "Pónganse toda la armadura de Dios para que puedan hacer frente a las artimañas del diablo."
-    },
-    pasaje2: {
-      cita: "2 Corintios 10:4",
-      texto: "Las armas con las que luchamos no son del mundo, sino que tienen el poder de Dios..."
-    }
-  },
-  {
-    tema: "Esperanza eterna",
-    pasaje1: {
-      cita: "Romanos 15:13",
-      texto: "Que el Dios de la esperanza los llene de toda alegría y paz mientras confían en él..."
-    },
-    pasaje2: {
-      cita: "1 Pedro 1:3",
-      texto: "Nos ha hecho nacer de nuevo para una esperanza viva mediante la resurrección de Jesucristo..."
-    }
-  },
-  {
-    tema: "La disciplina de Dios",
-    pasaje1: {
-      cita: "Hebreos 12:6",
-      texto: "Porque el Señor disciplina a los que ama, y azota a todo el que recibe como hijo."
-    },
-    pasaje2: {
-      cita: "Proverbios 3:11-12",
-      texto: "No desprecies, hijo mío, la disciplina del Señor... porque el Señor disciplina a quienes ama."
-    }
-  },
-  {
-    tema: "El poder de la lengua",
-    pasaje1: {
-      cita: "Santiago 3:5-6",
-      texto: "La lengua es un fuego, un mundo de maldad... contamina todo el cuerpo..."
-    },
-    pasaje2: {
-      cita: "Proverbios 18:21",
-      texto: "En la lengua hay poder de vida y muerte; quienes la aman comerán de su fruto."
-    }
-  },
-  {
-    tema: "Unidad en Cristo",
-    pasaje1: {
-      cita: "Efesios 4:3",
-      texto: "Esfuércense por mantener la unidad del Espíritu mediante el vínculo de la paz."
-    },
-    pasaje2: {
-      cita: "Juan 17:21",
-      texto: "Para que todos sean uno, así como tú, Padre, estás en mí y yo en ti..."
-    }
-  },
-  {
-    tema: "La soberanía de Dios",
-    pasaje1: {
-      cita: "Daniel 4:35",
-      texto: "Todos los pueblos de la tierra no son nada comparados con Él... hace lo que quiere..."
-    },
-    pasaje2: {
-      cita: "Romanos 9:20-21",
-      texto: "¿Quién eres tú, para pedirle cuentas a Dios? ¿Acaso no puede el alfarero hacer con el barro..."
-    }
-  },
-  {
-    tema: "La fe como victoria",
-    pasaje1: {
-      cita: "1 Juan 5:4",
-      texto: "Todo el que ha nacido de Dios vence al mundo. Ésta es la victoria que vence al mundo: nuestra fe."
-    },
-    pasaje2: {
-      cita: "Marcos 11:22-24",
-      texto: "Tengan fe en Dios... todo lo que pidan en oración, créanlo, y se les concederá."
-    }
-  },
-  {
-    tema: "El gozo en el Señor",
-    pasaje1: {
-      cita: "Filipenses 4:4",
-      texto: "Alégrense siempre en el Señor. Insisto: ¡Alégrense!"
-    },
-    pasaje2: {
-      cita: "Nehemías 8:10",
-      texto: "No se pongan tristes, pues el gozo del Señor es su fortaleza."
-    }
-  },
-  {
-    tema: "La verdad de la Palabra",
-    pasaje1: {
-      cita: "Juan 17:17",
-      texto: "Santíficalos en la verdad; tu palabra es la verdad."
-    },
-    pasaje2: {
-      cita: "2 Timoteo 3:16",
-      texto: "Toda la Escritura es inspirada por Dios y útil para enseñar, reprender, corregir y educar..."
-    }
-  }
-]
+    memo: [
+        {
+            tema: "Salvación por fe",
+            pasaje1: {
+                cita: "Efesios 2:8-9",
+                texto: "Porque por gracia ustedes han sido salvados mediante la fe..."
+            },
+            pasaje2: {
+                cita: "Romanos 3:28",
+                texto: "Sostenemos, pues, que el hombre es justificado por la fe..."
+            }
+        },
+        {
+            tema: "Amor al prójimo",
+            pasaje1: {
+                cita: "Mateo 22:39",
+                texto: "Ama a tu prójimo como a ti mismo."
+            },
+            pasaje2: {
+                cita: "Levítico 19:18",
+                texto: "No te vengarás ni guardarás rencor... amarás a tu prójimo."
+            }
+        },
+        {
+            tema: "Resurrección",
+            pasaje1: {
+                cita: "1 Corintios 15:20",
+                texto: "Mas ahora Cristo ha resucitado de los muertos..."
+            },
+            pasaje2: {
+                cita: "Juan 11:25",
+                texto: "Yo soy la resurrección y la vida. El que cree en mí, vivirá..."
+            }
+        },
+        {
+            tema: "Perdón",
+            pasaje1: {
+                cita: "Mateo 6:14",
+                texto: "Si perdonan a otros sus ofensas, también los perdonará a ustedes su Padre..."
+            },
+            pasaje2: {
+                cita: "Colosenses 3:13",
+                texto: "De modo que se toleren unos a otros y se perdonen si alguno tiene queja..."
+            }
+        },
+        {
+            tema: "Creación",
+            pasaje1: {
+                cita: "Génesis 1:1",
+                texto: "En el principio Dios creó los cielos y la tierra."
+            },
+            pasaje2: {
+                cita: "Juan 1:3",
+                texto: "Todas las cosas fueron hechas por medio de él, y sin él nada fue hecho..."
+            }
+        },
+        {
+            tema: "Pecado original",
+            pasaje1: {
+                cita: "Romanos 3:23",
+                texto: "Pues todos han pecado y están privados de la gloria de Dios..."
+            },
+            pasaje2: {
+                cita: "Romanos 6:23",
+                texto: "La paga del pecado es muerte, mientras que la dádiva de Dios es vida eterna..."
+            }
+        },
+        {
+            tema: "Fe de Abraham",
+            pasaje1: {
+                cita: "Génesis 15:6",
+                texto: "Abram creyó al Señor, y el Señor se lo reconoció como justicia."
+            },
+            pasaje2: {
+                cita: "Romanos 4:3",
+                texto: "Abraham creyó a Dios, y esto se le tomó en cuenta como justicia."
+            }
+        },
+        {
+            tema: "Segunda Venida",
+            pasaje1: {
+                cita: "Hechos 1:11",
+                texto: "Este mismo Jesús, que ha sido llevado de entre ustedes al cielo, vendrá otra vez..."
+            },
+            pasaje2: {
+                cita: "Apocalipsis 22:20",
+                texto: "El que da testimonio de estas cosas dice: 'Sí, vengo pronto'. Amén. ¡Ven, Señor Jesús!"
+            }
+        },
+        {
+            tema: "Fidelidad de Dios",
+            pasaje1: {
+                cita: "Lamentaciones 3:22-23",
+                texto: "Por la misericordia del Señor no hemos sido consumidos... grandes son su fidelidad."
+            },
+            pasaje2: {
+                cita: "2 Timoteo 2:13",
+                texto: "Si somos infieles, él sigue siendo fiel, porque no puede negarse a sí mismo."
+            }
+        },
+        {
+            tema: "Nueva vida en Cristo",
+            pasaje1: {
+                cita: "2 Corintios 5:17",
+                texto: "Si alguno está en Cristo, nueva criatura es..."
+            },
+            pasaje2: {
+                cita: "Romanos 6:4",
+                texto: "Fuimos sepultados con él en su muerte... para que anduviéramos en vida nueva."
+            }
+        },
+        {
+            tema: "El amor de Dios",
+            pasaje1: {
+                cita: "Juan 3:16",
+                texto: "Porque tanto amó Dios al mundo que dio a su Hijo unigénito..."
+            },
+            pasaje2: {
+                cita: "1 Juan 4:9",
+                texto: "Así manifestó Dios su amor entre nosotros: en que envió a su Hijo unigénito al mundo..."
+            }
+        },
+        {
+            tema: "El fruto del Espíritu",
+            pasaje1: {
+                cita: "Gálatas 5:22-23",
+                texto: "El fruto del Espíritu es amor, alegría, paz, paciencia..."
+            },
+            pasaje2: {
+                cita: "Efesios 5:9",
+                texto: "El fruto de la luz consiste en toda bondad, justicia y verdad."
+            }
+        },
+        {
+            tema: "La oración",
+            pasaje1: {
+                cita: "Mateo 6:9-13",
+                texto: "Ustedes deben orar así: 'Padre nuestro que estás en el cielo...'"
+            },
+            pasaje2: {
+                cita: "Santiago 5:16",
+                texto: "La oración del justo es poderosa y eficaz."
+            }
+        },
+        {
+            tema: "La humildad",
+            pasaje1: {
+                cita: "Filipenses 2:3",
+                texto: "No hagan nada por egoísmo... sean humildes y consideren a los demás como superiores."
+            },
+            pasaje2: {
+                cita: "1 Pedro 5:6",
+                texto: "Humíllense, pues, bajo la poderosa mano de Dios, para que él los exalte a su debido tiempo."
+            }
+        },
+        {
+            tema: "Confianza en Dios",
+            pasaje1: {
+                cita: "Proverbios 3:5-6",
+                texto: "Confía en el Señor con todo tu corazón... él enderezará tus sendas."
+            },
+            pasaje2: {
+                cita: "Salmos 37:5",
+                texto: "Encomienda al Señor tu camino; confía en él, y él actuará."
+            }
+        },
+        {
+            tema: "Consuelo en la aflicción",
+            pasaje1: {
+                cita: "Salmos 34:18",
+                texto: "El Señor está cerca de los quebrantados de corazón..."
+            },
+            pasaje2: {
+                cita: "2 Corintios 1:3-4",
+                texto: "Dios nos consuela en todas nuestras tribulaciones, para que con ese mismo consuelo..."
+            }
+        },
+        {
+            tema: "Obediencia a Dios",
+            pasaje1: {
+                cita: "Juan 14:15",
+                texto: "Si ustedes me aman, obedecerán mis mandamientos."
+            },
+            pasaje2: {
+                cita: "1 Juan 5:3",
+                texto: "En esto consiste el amor a Dios: en que obedezcamos sus mandamientos."
+            }
+        },
+        {
+            tema: "La gracia de Dios",
+            pasaje1: {
+                cita: "Tito 2:11",
+                texto: "En verdad, Dios ha manifestado a toda la humanidad su gracia..."
+            },
+            pasaje2: {
+                cita: "2 Corintios 12:9",
+                texto: "Te basta con mi gracia, pues mi poder se perfecciona en la debilidad."
+            }
+        },
+        {
+            tema: "Sabiduría Divina",
+            pasaje1: {
+                cita: "Santiago 1:5",
+                texto: "Si a alguno de ustedes le falta sabiduría, pídasela a Dios..."
+            },
+            pasaje2: {
+                cita: "Proverbios 9:10",
+                texto: "El temor del Señor es el principio de la sabiduría..."
+            }
+        },
+        {
+            tema: "Arrepentimiento",
+            pasaje1: {
+                cita: "Hechos 3:19",
+                texto: "Por tanto, para que sean borrados sus pecados, arrepiéntanse y vuélvanse a Dios..."
+            },
+            pasaje2: {
+                cita: "Lucas 13:3",
+                texto: "Si no se arrepienten, todos perecerán igualmente."
+            }
+        },
+        {
+            tema: "Libertad en Cristo",
+            pasaje1: {
+                cita: "Gálatas 5:1",
+                texto: "Cristo nos libertó para que vivamos en libertad..."
+            },
+            pasaje2: {
+                cita: "Juan 8:36",
+                texto: "Así que, si el Hijo los libera, serán ustedes verdaderamente libres."
+            }
+        },
+        {
+            tema: "El Reino de Dios",
+            pasaje1: {
+                cita: "Mateo 6:33",
+                texto: "Busquen primeramente el reino de Dios y su justicia..."
+            },
+            pasaje2: {
+                cita: "Romanos 14:17",
+                texto: "El reino de Dios no es cuestión de comidas o bebidas, sino de justicia, paz y gozo..."
+            }
+        },
+        {
+            tema: "La armadura de Dios",
+            pasaje1: {
+                cita: "Efesios 6:11",
+                texto: "Pónganse toda la armadura de Dios para que puedan hacer frente a las artimañas del diablo."
+            },
+            pasaje2: {
+                cita: "2 Corintios 10:4",
+                texto: "Las armas con las que luchamos no son del mundo, sino que tienen el poder de Dios..."
+            }
+        },
+        {
+            tema: "Esperanza eterna",
+            pasaje1: {
+                cita: "Romanos 15:13",
+                texto: "Que el Dios de la esperanza los llene de toda alegría y paz mientras confían en él..."
+            },
+            pasaje2: {
+                cita: "1 Pedro 1:3",
+                texto: "Nos ha hecho nacer de nuevo para una esperanza viva mediante la resurrección de Jesucristo..."
+            }
+        },
+        {
+            tema: "La disciplina de Dios",
+            pasaje1: {
+                cita: "Hebreos 12:6",
+                texto: "Porque el Señor disciplina a los que ama, y azota a todo el que recibe como hijo."
+            },
+            pasaje2: {
+                cita: "Proverbios 3:11-12",
+                texto: "No desprecies, hijo mío, la disciplina del Señor... porque el Señor disciplina a quienes ama."
+            }
+        },
+        {
+            tema: "El poder de la lengua",
+            pasaje1: {
+                cita: "Santiago 3:5-6",
+                texto: "La lengua es un fuego, un mundo de maldad... contamina todo el cuerpo..."
+            },
+            pasaje2: {
+                cita: "Proverbios 18:21",
+                texto: "En la lengua hay poder de vida y muerte; quienes la aman comerán de su fruto."
+            }
+        },
+        {
+            tema: "Unidad en Cristo",
+            pasaje1: {
+                cita: "Efesios 4:3",
+                texto: "Esfuércense por mantener la unidad del Espíritu mediante el vínculo de la paz."
+            },
+            pasaje2: {
+                cita: "Juan 17:21",
+                texto: "Para que todos sean uno, así como tú, Padre, estás en mí y yo en ti..."
+            }
+        },
+        {
+            tema: "La soberanía de Dios",
+            pasaje1: {
+                cita: "Daniel 4:35",
+                texto: "Todos los pueblos de la tierra no son nada comparados con Él... hace lo que quiere..."
+            },
+            pasaje2: {
+                cita: "Romanos 9:20-21",
+                texto: "¿Quién eres tú, para pedirle cuentas a Dios? ¿Acaso no puede el alfarero hacer con el barro..."
+            }
+        },
+        {
+            tema: "La fe como victoria",
+            pasaje1: {
+                cita: "1 Juan 5:4",
+                texto: "Todo el que ha nacido de Dios vence al mundo. Ésta es la victoria que vence al mundo: nuestra fe."
+            },
+            pasaje2: {
+                cita: "Marcos 11:22-24",
+                texto: "Tengan fe en Dios... todo lo que pidan en oración, créanlo, y se les concederá."
+            }
+        },
+        {
+            tema: "El gozo en el Señor",
+            pasaje1: {
+                cita: "Filipenses 4:4",
+                texto: "Alégrense siempre en el Señor. Insisto: ¡Alégrense!"
+            },
+            pasaje2: {
+                cita: "Nehemías 8:10",
+                texto: "No se pongan tristes, pues el gozo del Señor es su fortaleza."
+            }
+        },
+        {
+            tema: "La verdad de la Palabra",
+            pasaje1: {
+                cita: "Juan 17:17",
+                texto: "Santíficalos en la verdad; tu palabra es la verdad."
+            },
+            pasaje2: {
+                cita: "2 Timoteo 3:16",
+                texto: "Toda la Escritura es inspirada por Dios y útil para enseñar, reprender, corregir y educar..."
+            }
+        }
+    ]
 };
 
 // ====================================================
@@ -1725,7 +1725,7 @@ function loadTriviaQuestion() {
 
 function handleTriviaAnswer(questionIndex, selectedOption) {
     const correct = bibleData.trivia[questionIndex].respuesta === selectedOption;
-    
+
     if (correct) {
         players[currentPlayerIndex].score += 10;
         showNotification(`✅ Correcto! +10 puntos para ${players[currentPlayerIndex].name}`);
@@ -1756,16 +1756,16 @@ function loadMemoGame() {
     // Convertir cada { tema, pasaje1, pasaje2 } en dos tarjetas
     // que comparten el mismo "tema".
     memoPairs = bibleData.memo.flatMap(pair => [
-      {
-        tema: pair.tema,
-        cita: pair.pasaje1.cita,
-        texto: pair.pasaje1.texto
-      },
-      {
-        tema: pair.tema,
-        cita: pair.pasaje2.cita,
-        texto: pair.pasaje2.texto
-      }
+        {
+            tema: pair.tema,
+            cita: pair.pasaje1.cita,
+            texto: pair.pasaje1.texto
+        },
+        {
+            tema: pair.tema,
+            cita: pair.pasaje2.cita,
+            texto: pair.pasaje2.texto
+        }
     ]);
 
     // Barajamos las tarjetas
@@ -1802,9 +1802,9 @@ function loadMemoGame() {
     // Mostrar todas las tarjetas (preview) durante 5 seg
     const allCards = document.querySelectorAll('.memo-card');
     allCards.forEach(card => card.classList.add('flipped'));
-    
+
     setTimeout(() => {
-      allCards.forEach(card => card.classList.remove('flipped'));
+        allCards.forEach(card => card.classList.remove('flipped'));
     }, 5000);
 }
 
@@ -1834,7 +1834,7 @@ function checkForMatch() {
         players[currentPlayerIndex].score += 5;
         matchedPairs++;
         showNotification(`¡Par encontrado! +5 pts para ${players[currentPlayerIndex].name}`);
-        
+
         flippedCards = [];
         updateScoreboard();
 
