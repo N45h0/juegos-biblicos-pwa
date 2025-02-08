@@ -22,6 +22,42 @@ body {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
+/* Barra superior para mostrar nombre de usuario y logout */
+.top-bar {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.user-info {
+  margin-right: 10px;
+  font-size: 1.1em;
+  color: #2c3e50;
+  font-weight: bold;
+}
+
+/* Estilo para la sección de jugadores */
+.player-setup {
+  background: #f8f9fa;
+  padding: 20px;
+  border-radius: 8px;
+  margin-top: 20px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.player-number {
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+
+.player-inputs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+
 /* =========================
    TÍTULOS PRINCIPALES
    ========================= */
