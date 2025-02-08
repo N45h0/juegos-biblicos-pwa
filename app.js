@@ -1520,35 +1520,120 @@ const bibleData = {
     ]
 };
 
-// ====================================================
-// LÓGICA MULTIJUGADOR
-// ====================================================
+/*******************************************************
+ * LÓGICA DE MULTIJUGADOR Y CONFIGURACIÓN
+ *******************************************************/
 let players = [];
 let currentPlayerIndex = 0;
 let currentTabuIndex = 0;
 let currentTriviaIndex = 0;
 let selectedViolations = [];
-// Variables para Memo
+
+// Variables para MEMO
 let flippedCards = [];
 let matchedPairs = 0;
 let memoPairs = [];
 
-// Función para crear inputs dinámicos
+/*******************************************************
+ * SECCIÓN: REGISTRO / LOGIN / LOGIN GOOGLE / LOGOUT
+ *******************************************************/
+
+// 1. REGISTRO
+document.getElementById('register-form').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const email = document.getElementById('register-email').value;
+    const password = document.getElementById('register-pass').value;
+
+    auth.createUserWithEmailAndPassword(email, password)
+        .then((userCredential) => {
+            // Registro exitoso
+            const user = userCredential.user;
+            console.log("Usuario registrado:", user.email);
+            alert("¡Registro exitoso!");
+        })
+        .catch((error) => {
+            console.error("Error al registrar:", error);
+            alert("Error al registrar: " + error.message);
+        });
+});
+
+// 2. LOGIN
+document.getElementById('login-form').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const email = document.getElementById('login-email').value;
+    const password = document.getElementById('login-pass').value;
+
+    auth.signInWithEmailAndPassword(email, password)
+        .then((userCredential) => {
+            // Login exitoso
+            const user = userCredential.user;
+            console.log("Usuario logueado:", user.email);
+            alert("Inicio de sesión exitoso");
+            // Aquí podrías ocultar/mostrar pantallas
+        })
+        .catch((error) => {
+            console.error("Error al iniciar sesión:", error);
+            alert("Error al iniciar sesión: " + error.message);
+        });
+});
+
+// 3. LOGIN CON GOOGLE
+const googleProvider = new firebase.auth.GoogleAuthProvider();
+document.getElementById('google-btn').addEventListener('click', () => {
+    auth.signInWithPopup(googleProvider)
+        .then((result) => {
+            console.log("Logueado con Google:", result.user);
+            alert("Inicio de sesión con Google exitoso");
+        })
+        .catch((error) => {
+            console.error("Error con Google:", error);
+            alert("Error con Google: " + error.message);
+        });
+});
+
+// 4. DETECTAR CAMBIOS DE SESIÓN
+auth.onAuthStateChanged((user) => {
+    if (user) {
+        console.log("Usuario activo:", user.email);
+        // Podrías mostrar la pantalla de juego, etc.
+    } else {
+        console.log("No hay usuario en sesión");
+        // Muestra la pantalla de login/registro
+    }
+});
+
+// 5. LOGOUT
+function logout() {
+    auth.signOut()
+        .then(() => {
+            alert("Sesión cerrada");
+        })
+        .catch((error) => {
+            console.error("Error al cerrar sesión:", error);
+        });
+}
+
+
+/*******************************************************
+ * CREAR INPUTS DE JUGADORES
+ *******************************************************/
 function createPlayerInputs(numberOfPlayers) {
     const container = document.getElementById('player-inputs-container');
     container.innerHTML = '';
 
     for (let i = 1; i <= numberOfPlayers; i++) {
         container.innerHTML += `
-            <input type="text"
-                   id="player${i}"
-                   placeholder="Jugador ${i}"
-                   required>
-        `;
+      <input type="text" 
+             id="player${i}" 
+             placeholder="Jugador ${i}" 
+             required>
+    `;
     }
 }
 
-// Función para iniciar el juego
+/*******************************************************
+ * FUNCIÓN PARA INICIAR EL JUEGO
+ *******************************************************/
 function startGame() {
     const numberOfPlayers = document.getElementById('player-count').value;
     players = [];
@@ -1561,35 +1646,37 @@ function startGame() {
         });
     }
 
+    // Oculta la pantalla de inicio y muestra el game-screen
     document.getElementById('start-screen').style.display = 'none';
     document.getElementById('game-screen').style.display = 'block';
     updateScoreboard();
 }
 
-// Actualizar marcador
+/*******************************************************
+ * SISTEMA DE TURNOS
+ *******************************************************/
 function updateScoreboard() {
     const scoresContainer = document.getElementById('scores-container');
     const currentPlayer = document.getElementById('current-player-name');
 
     // Mostrar puntuaciones
     scoresContainer.innerHTML = players.map(player => `
-        <div class="score-item">
-            ${player.name}: <span>${player.score} pts</span>
-        </div>
-    `).join('');
+    <div class="score-item">
+      ${player.name}: <span>${player.score} pts</span>
+    </div>
+  `).join('');
 
     // Mostrar quién juega actualmente
     currentPlayer.textContent = players[currentPlayerIndex].name;
 }
 
-// Sistema de turnos
 function nextTurn() {
     currentPlayerIndex = (currentPlayerIndex + 1) % players.length;
     updateScoreboard();
     showTurnPopup(players[currentPlayerIndex].name);
 }
 
-// Mostrar popup de turno
+// Popup de turno
 function showTurnPopup(playerName) {
     const popup = document.getElementById('turn-popup');
     const playerNameElement = document.getElementById('turn-player-name');
@@ -1597,15 +1684,15 @@ function showTurnPopup(playerName) {
     playerNameElement.textContent = playerName;
     popup.style.display = 'flex';
 
-    // Ocultar el popup después de 1.5 segundos
+    // Ocultar popup después de 1.5s
     setTimeout(() => {
         popup.style.display = 'none';
     }, 1500);
 }
 
-// ====================================================
-// FUNCIONES DE NOTIFICACIÓN NO BLOQUEANTE
-// ====================================================
+/*******************************************************
+ * NOTIFICACIÓN NO BLOQUEANTE
+ *******************************************************/
 function showNotification(message, isError = false) {
     const notificationArea = document.getElementById('notification-area');
     const notif = document.createElement('div');
@@ -1621,43 +1708,40 @@ function showNotification(message, isError = false) {
     }, 3000);
 }
 
-// ====================================================
-// LÓGICA DEL TABÚ
-// ====================================================
+/*******************************************************
+ * TABÚ
+ *******************************************************/
 function loadTabuCard() {
     const card = bibleData.tabu[currentTabuIndex];
     const container = document.getElementById("game-container");
 
     container.innerHTML = `
-        <div class="tabu-card">
-            <h2>${card.palabra}</h2>
-            <div class="prohibidas-box">
-                <h4>Palabras prohibidas:</h4>
-                ${card.prohibidas.map(word => `
-                    <label class="violation-check">
-                        <input type="checkbox" value="${word}">
-                        ${word}
-                    </label>
-                `).join("")}
-            </div>
-            
-            <div class="tabu-controls">
-                <button onclick="handleTabuSuccess()">✅ Acierto (sin violaciones)</button>
-                <button onclick="handleTabuFailure()">❌ Fallo</button>
-            </div>
-            
-            <div class="guesser-selection" id="guesser-section">
-                <h4>¿Quién adivinó?</h4>
-                ${players.map((player, index) => `
-                    <button onclick="assignGuesserPoints(${index})">
-                        ${player.name}
-                    </button>
-                `).join("")}
-            </div>
-            
-            <small>Referencia: ${card.referencia}</small>
-        </div>
-    `;
+    <div class="tabu-card">
+      <h2>${card.palabra}</h2>
+      <div class="prohibidas-box">
+        <h4>Palabras prohibidas:</h4>
+        ${card.prohibidas.map(word => `
+          <label class="violation-check">
+            <input type="checkbox" value="${word}">
+            ${word}
+          </label>
+        `).join("")}
+      </div>
+      <div class="tabu-controls">
+        <button onclick="handleTabuSuccess()">✅ Acierto (sin violaciones)</button>
+        <button onclick="handleTabuFailure()">❌ Fallo</button>
+      </div>
+      <div class="guesser-selection" id="guesser-section">
+        <h4>¿Quién adivinó?</h4>
+        ${players.map((player, index) => `
+          <button onclick="assignGuesserPoints(${index})">
+            ${player.name}
+          </button>
+        `).join("")}
+      </div>
+      <small>Referencia: ${card.referencia}</small>
+    </div>
+  `;
 
     // Inicializar selección de violaciones
     selectedViolations = [];
@@ -1673,7 +1757,7 @@ function loadTabuCard() {
 }
 
 function handleTabuSuccess() {
-    // +15 por acierto, -3 por cada palabra prohibida dicha
+    // +15 por acierto, -3 por cada palabra prohibida
     const penalty = selectedViolations.length * 3;
     const totalPoints = 15 - penalty;
 
@@ -1686,12 +1770,12 @@ function handleTabuSuccess() {
 function handleTabuFailure() {
     showNotification("❌ Nadie adivinó la palabra", true);
     nextTabuCard();
-    // Al fallar, se cambia el turno
+    // Al fallar, pasa turno
     nextTurn();
 }
 
 function assignGuesserPoints(playerIndex) {
-    players[playerIndex].score += 5; // Puntos extra por adivinar
+    players[playerIndex].score += 5;
     showNotification(`⭐ ${players[playerIndex].name} gana 5 puntos por adivinar!`);
     document.getElementById('guesser-section').style.display = 'none';
 }
@@ -1701,26 +1785,24 @@ function nextTabuCard() {
     loadTabuCard();
 }
 
-// ====================================================
-// LÓGICA DE TRIVIA
-// ====================================================
+/*******************************************************
+ * TRIVIA
+ *******************************************************/
 function loadTriviaQuestion() {
     const question = bibleData.trivia[currentTriviaIndex];
     const container = document.getElementById("game-container");
 
     container.innerHTML = `
-        <div class="card">
-            <h3>${question.pregunta}</h3>
-            <div class="opciones">
-                ${question.opciones.map((op, i) => `
-                    <button onclick="handleTriviaAnswer(${currentTriviaIndex}, ${i})">
-                        ${op}
-                    </button>
-                `).join("")}
-            </div>
-            <small>Referencia: ${question.referencia}</small>
-        </div>
-    `;
+    <div class="card">
+      <h3>${question.pregunta}</h3>
+      <div class="opciones">
+        ${question.opciones.map((op, i) => `
+          <button onclick="handleTriviaAnswer(${currentTriviaIndex}, ${i})">${op}</button>
+        `).join("")}
+      </div>
+      <small>Referencia: ${question.referencia}</small>
+    </div>
+  `;
 }
 
 function handleTriviaAnswer(questionIndex, selectedOption) {
@@ -1729,32 +1811,25 @@ function handleTriviaAnswer(questionIndex, selectedOption) {
     if (correct) {
         players[currentPlayerIndex].score += 10;
         showNotification(`✅ Correcto! +10 puntos para ${players[currentPlayerIndex].name}`);
-        // Si acierta, NO se cambia de turno
-        // nextTurn(); // Omitido para conservar turno
+        // Mantiene turno si acierta
+        // nextTurn(); // Coméntalo si quieres que siga
     } else {
-        // Respuesta incorrecta
-        const correctAnswer = bibleData.trivia[questionIndex].opciones[
-            bibleData.trivia[questionIndex].respuesta
-        ];
+        const correctAnswer = bibleData.trivia[questionIndex].opciones[bibleData.trivia[questionIndex].respuesta];
         showNotification(`❌ Incorrecto. La respuesta era: ${correctAnswer}`, true);
-
-        // Al fallar, se pasa el turno
         nextTurn();
     }
 
-    // Cargar siguiente pregunta
     currentTriviaIndex = (currentTriviaIndex + 1) % bibleData.trivia.length;
     loadTriviaQuestion();
 }
 
-// ====================================================
-// LÓGICA DE MEMO (CON 5 SEG DE PREVIEW Y COMPARACIÓN POR TEMA)
-// ====================================================
+/*******************************************************
+ * MEMO (con vista previa y comparación por tema)
+ *******************************************************/
 function loadMemoGame() {
     const container = document.getElementById("game-container");
 
     // Convertir cada { tema, pasaje1, pasaje2 } en dos tarjetas
-    // que comparten el mismo "tema".
     memoPairs = bibleData.memo.flatMap(pair => [
         {
             tema: pair.tema,
@@ -1768,38 +1843,35 @@ function loadMemoGame() {
         }
     ]);
 
-    // Barajamos las tarjetas
+    // Barajar
     memoPairs = shuffleArray(memoPairs);
 
-    // Reiniciar estado
     flippedCards = [];
     matchedPairs = 0;
 
-    // Generar tablero con "?" al frente y cita+texto en la parte trasera
     container.innerHTML = `
-      <div class="memo-intro">
-        <p>
-          ¡Encuentra las parejas que comparten el mismo <b>tema</b>!
-          Tendrás <b>5 segundos</b> para ver todas las tarjetas volteadas antes de que se oculten.
-        </p>
-      </div>
-      <div class="memo-grid">
-        ${memoPairs.map((pasaje, index) => `
-          <div class="memo-card" data-index="${index}" onclick="flipCard(this)">
-            <div class="front">?</div>
-            <div class="back">
-              <strong>${pasaje.cita}</strong><br>
-              <small>${pasaje.texto}</small>
-            </div>
+    <div class="memo-intro">
+      <p>
+        ¡Encuentra las parejas que comparten el mismo <b>tema</b>!
+        Tendrás <b>5 segundos</b> para ver todas las tarjetas volteadas antes de que se oculten.
+      </p>
+    </div>
+    <div class="memo-grid">
+      ${memoPairs.map((pasaje, index) => `
+        <div class="memo-card" data-index="${index}" onclick="flipCard(this)">
+          <div class="front">?</div>
+          <div class="back">
+            <strong>${pasaje.cita}</strong><br>
+            <small>${pasaje.texto}</small>
           </div>
-        `).join("")}
-      </div>
-    `;
+        </div>
+      `).join("")}
+    </div>
+  `;
 
-    // Actualizamos marcador
     updateScoreboard();
 
-    // Mostrar todas las tarjetas (preview) durante 5 seg
+    // Vista previa de 5 seg
     const allCards = document.querySelectorAll('.memo-card');
     allCards.forEach(card => card.classList.add('flipped'));
 
@@ -1809,7 +1881,6 @@ function loadMemoGame() {
 }
 
 function flipCard(card) {
-    // Permitir voltear hasta 2
     if (flippedCards.length < 2 && !card.classList.contains('flipped')) {
         card.classList.add('flipped');
         flippedCards.push(card);
@@ -1828,9 +1899,8 @@ function checkForMatch() {
     const pass1 = memoPairs[index1];
     const pass2 = memoPairs[index2];
 
-    // Coinciden si tienen el mismo "tema"
+    // Coinciden si comparten el mismo tema
     if (pass1.tema === pass2.tema) {
-        // ACERTÓ
         players[currentPlayerIndex].score += 5;
         matchedPairs++;
         showNotification(`¡Par encontrado! +5 pts para ${players[currentPlayerIndex].name}`);
@@ -1838,33 +1908,30 @@ function checkForMatch() {
         flippedCards = [];
         updateScoreboard();
 
-        // Verificar si terminaron todos los pares
         if (matchedPairs === bibleData.memo.length) {
             showNotification("🎉 ¡Han encontrado todos los pares!");
         }
-        // Si NO quieres que mantenga el turno al acertar, descomenta:
-        // nextTurn();
+        // nextTurn(); // Solo si deseas que cambie de turno al acertar
     } else {
-        // FALLÓ
         setTimeout(() => {
             card1.classList.remove('flipped');
             card2.classList.remove('flipped');
             flippedCards = [];
-            nextTurn(); // se pasa el turno al fallar
+            nextTurn(); // Cambia turno al fallar
         }, 1000);
     }
 }
 
-// ====================================================
-// FUNCIONES AUXILIARES
-// ====================================================
+/*******************************************************
+ * FUNCIÓN AUXILIAR: Shuffle
+ *******************************************************/
 function shuffleArray(array) {
     return array.sort(() => Math.random() - 0.5);
 }
 
-// ====================================================
-// CARGAR JUEGO
-// ====================================================
+/*******************************************************
+ * CARGAR JUEGO
+ *******************************************************/
 function loadGame(gameType) {
     const container = document.getElementById("game-container");
     container.innerHTML = "";
