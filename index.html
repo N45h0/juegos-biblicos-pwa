@@ -94,31 +94,24 @@
     <!-- Área de notificaciones no bloqueantes -->
     <div id="notification-area"></div>
 
-    <!-- Scripts de Firebase (versión “namespace”) -->
-    <script src="https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.17.2/firebase-auth.js"></script>
+    <!-- Firebase App (compat) -->
+    <script src="https://www.gstatic.com/firebasejs/9.17.2/firebase-app-compat.js"></script>
+    <!-- Firebase Auth (compat) -->
+    <script src="https://www.gstatic.com/firebasejs/9.17.2/firebase-auth-compat.js"></script>
 
     <script>
-        // Configuración de Firebase
         const firebaseConfig = {
-          apiKey: "AIzaSyCIoeE2vmY6USqFi-osi7kQVu4-Or_JJsE",
-          authDomain: "biblegames-6b936.firebaseapp.com",
-          projectId: "biblegames-6b936",
-          storageBucket: "biblegames-6b936.firebasestorage.app",
-          messagingSenderId: "343894525738",
-          appId: "1:343894525738:web:a99c3a460aa0c76a1a8053",
-          measurementId: "G-9HZELG76YK"
+            // ...
         };
-      
-        // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-        const analytics = getAnalytics(app);
+        // Inicializar con el objeto global `firebase`
         firebase.initializeApp(firebaseConfig);
+        // Asignar la variable auth
         const auth = firebase.auth();
     </script>
 
-    <!-- Script principal con la lógica del juego y auth -->
+    <!-- Tu archivo app.js -->
     <script src="app.js"></script>
+
 </body>
 
 </html>
