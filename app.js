@@ -1520,6 +1520,7 @@ const bibleData = {
     ]
 };
 
+
 /*******************************************************
  * LÓGICA MULTIJUGADOR Y LOGIN/REGISTRO
  *******************************************************/
@@ -1590,18 +1591,33 @@ document.getElementById('google-btn').addEventListener('click', () => {
 // ESCUCHAR ESTADO DE SESIÓN
 // ======================
 auth.onAuthStateChanged((user) => {
-    if (user) {
-        console.log("Usuario activo:", user.email);
-        document.getElementById('player-setup-section').style.display = 'block';
-        document.getElementById('user-info').textContent = `Hola, ${user.email}`;
-        document.getElementById('logout-btn').style.display = 'inline-block';
-    } else {
-        console.log("No hay usuario en sesión");
-        document.getElementById('player-setup-section').style.display = 'none';
-        document.getElementById('user-info').textContent = "";
-        document.getElementById('logout-btn').style.display = 'none';
-    }
+  if (user) {
+    console.log("Usuario activo:", user.email);
+
+    // Ocultar formularios de login/registro
+    // asumiendo que tu sección login está dentro de algo como <div class="auth-container">
+    document.querySelector('.auth-container').style.display = 'none';
+
+    // Mostrar la sección para configurar jugadores
+    document.getElementById('player-setup-section').style.display = 'block';
+
+    // Mostrar en la barra superior "Hola, user.email"
+    document.getElementById('user-info').textContent = `Hola, ${user.email}`;
+    document.getElementById('logout-btn').style.display = 'inline-block';
+
+  } else {
+    console.log("No hay usuario en sesión");
+
+    // Mostrar formularios de login/registro
+    document.querySelector('.auth-container').style.display = 'flex';
+
+    // Ocultar la sección de jugadores
+    document.getElementById('player-setup-section').style.display = 'none';
+    document.getElementById('user-info').textContent = "";
+    document.getElementById('logout-btn').style.display = 'none';
+  }
 });
+
 
 // ======================
 // CERRAR SESIÓN
@@ -1627,11 +1643,11 @@ function createPlayerInputs(numberOfPlayers) {
 
     for (let i = 1; i <= numberOfPlayers; i++) {
         container.innerHTML += `
-      <input type="text" 
-             id="player${i}" 
-             placeholder="Jugador ${i}" 
-             required>
-    `;
+        <input type="text" 
+               id="player${i}" 
+               placeholder="Jugador ${i}" 
+               required>
+      `;
     }
 }
 
@@ -1666,10 +1682,10 @@ function updateScoreboard() {
     const currentPlayer = document.getElementById('current-player-name');
 
     scoresContainer.innerHTML = players.map(player => `
-    <div class="score-item">
-      ${player.name}: <span>${player.score} pts</span>
-    </div>
-  `).join('');
+      <div class="score-item">
+        ${player.name}: <span>${player.score} pts</span>
+      </div>
+    `).join('');
 
     currentPlayer.textContent = players[currentPlayerIndex].name;
 }
@@ -1710,4 +1726,267 @@ function showNotification(message, isError = false) {
     setTimeout(() => {
         notificationArea.removeChild(notif);
     }, 3000);
+}
+
+/*******************************************************
+ * LÓGICA DE TABÚ, TRIVIA, MEMO
+ *******************************************************/
+
+// Variables Tabú
+let currentTabuIndex = 0;
+let selectedViolations = [];
+
+// Variables Trivia
+let currentTriviaIndex = 0;
+
+// Variables Memo
+let flippedCards = [];
+let matchedPairs = 0;
+let memoPairs = [];
+
+/*******************************************************
+ * FUNCIÓN PARA CARGAR ALGUNO DE LOS 3 JUEGOS
+ *******************************************************/
+function loadGame(gameType) {
+    const container = document.getElementById("game-container");
+    container.innerHTML = "";
+
+    switch (gameType) {
+        case "tabu":
+            currentTabuIndex = 0;
+            loadTabuCard();
+            break;
+        case "trivia":
+            currentTriviaIndex = 0;
+            loadTriviaQuestion();
+            break;
+        case "memo":
+            loadMemoGame();
+            break;
+    }
+}
+
+/*******************************************************
+ * TABÚ
+ *******************************************************/
+function loadTabuCard() {
+    const card = bibleData.tabu[currentTabuIndex];
+    const container = document.getElementById("game-container");
+
+    container.innerHTML = `
+      <div class="tabu-card">
+        <h2>${card.palabra}</h2>
+        <div class="prohibidas-box">
+          <h4>Palabras prohibidas:</h4>
+          ${card.prohibidas.map(word => `
+            <label class="violation-check">
+              <input type="checkbox" value="${word}">
+              ${word}
+            </label>
+          `).join("")}
+        </div>
+        <div class="tabu-controls">
+          <button onclick="handleTabuSuccess()">✅ Acierto (sin violaciones)</button>
+          <button onclick="handleTabuFailure()">❌ Fallo</button>
+        </div>
+        <div class="guesser-selection" id="guesser-section">
+          <h4>¿Quién adivinó?</h4>
+          ${players.map((player, index) => `
+            <button onclick="assignGuesserPoints(${index})">
+              ${player.name}
+            </button>
+          `).join("")}
+        </div>
+        <small>Referencia: ${card.referencia}</small>
+      </div>
+    `;
+
+    // Inicializar selección de violaciones
+    selectedViolations = [];
+    document.querySelectorAll('.violation-check input').forEach(checkbox => {
+        checkbox.addEventListener('change', e => {
+            if (e.target.checked) {
+                selectedViolations.push(e.target.value);
+            } else {
+                selectedViolations = selectedViolations.filter(word => word !== e.target.value);
+            }
+        });
+    });
+}
+
+function handleTabuSuccess() {
+    // +15 por acierto, -3 por cada palabra prohibida
+    const penalty = selectedViolations.length * 3;
+    const totalPoints = 15 - penalty;
+
+    players[currentPlayerIndex].score += Math.max(totalPoints, 0);
+    showNotification(`${players[currentPlayerIndex].name} obtiene ${Math.max(totalPoints, 0)} puntos!`);
+    nextTabuCard();
+}
+
+function handleTabuFailure() {
+    showNotification("❌ Nadie adivinó la palabra", true);
+    nextTabuCard();
+    // Al fallar, pasa turno
+    nextTurn();
+}
+
+function assignGuesserPoints(playerIndex) {
+    players[playerIndex].score += 5;
+    showNotification(`⭐ ${players[playerIndex].name} gana 5 puntos por adivinar!`);
+    document.getElementById('guesser-section').style.display = 'none';
+}
+
+function nextTabuCard() {
+    currentTabuIndex = (currentTabuIndex + 1) % bibleData.tabu.length;
+    loadTabuCard();
+}
+
+/*******************************************************
+ * TRIVIA
+ *******************************************************/
+function loadTriviaQuestion() {
+    const question = bibleData.trivia[currentTriviaIndex];
+    const container = document.getElementById("game-container");
+
+    container.innerHTML = `
+      <div class="card">
+        <h3>${question.pregunta}</h3>
+        <div class="opciones">
+          ${question.opciones.map((op, i) => `
+            <button onclick="handleTriviaAnswer(${currentTriviaIndex}, ${i})">
+              ${op}
+            </button>
+          `).join("")}
+        </div>
+        <small>Referencia: ${question.referencia}</small>
+      </div>
+    `;
+}
+
+function handleTriviaAnswer(questionIndex, selectedOption) {
+    const correct = bibleData.trivia[questionIndex].respuesta === selectedOption;
+
+    if (correct) {
+        players[currentPlayerIndex].score += 10;
+        showNotification(`✅ Correcto! +10 puntos para ${players[currentPlayerIndex].name}`);
+        // Mantiene turno si acierta
+    } else {
+        const correctAnswer = bibleData.trivia[questionIndex].opciones[bibleData.trivia[questionIndex].respuesta];
+        showNotification(`❌ Incorrecto. La respuesta era: ${correctAnswer}`, true);
+
+        // Al fallar, se pasa el turno
+        nextTurn();
+    }
+
+    currentTriviaIndex = (currentTriviaIndex + 1) % bibleData.trivia.length;
+    loadTriviaQuestion();
+}
+
+/*******************************************************
+ * MEMO
+ *******************************************************/
+function loadMemoGame() {
+    const container = document.getElementById("game-container");
+
+    // Convertir cada { tema, pasaje1, pasaje2 } en dos tarjetas
+    memoPairs = bibleData.memo.flatMap(pair => [
+        {
+            tema: pair.tema,
+            cita: pair.pasaje1.cita,
+            texto: pair.pasaje1.texto
+        },
+        {
+            tema: pair.tema,
+            cita: pair.pasaje2.cita,
+            texto: pair.pasaje2.texto
+        }
+    ]);
+
+    // Barajar
+    memoPairs = shuffleArray(memoPairs);
+
+    flippedCards = [];
+    matchedPairs = 0;
+
+    container.innerHTML = `
+      <div class="memo-intro">
+        <p>
+          ¡Encuentra las parejas que comparten el mismo <b>tema</b>!
+          Tendrás <b>5 segundos</b> para ver todas las tarjetas volteadas antes de que se oculten.
+        </p>
+      </div>
+      <div class="memo-grid">
+        ${memoPairs.map((pasaje, index) => `
+          <div class="memo-card" data-index="${index}" onclick="flipCard(this)">
+            <div class="front">?</div>
+            <div class="back">
+              <strong>${pasaje.cita}</strong><br>
+              <small>${pasaje.texto}</small>
+            </div>
+          </div>
+        `).join("")}
+      </div>
+    `;
+
+    updateScoreboard();
+
+    // Vista previa de 5 seg
+    const allCards = document.querySelectorAll('.memo-card');
+    allCards.forEach(card => card.classList.add('flipped'));
+
+    setTimeout(() => {
+        allCards.forEach(card => card.classList.remove('flipped'));
+    }, 5000);
+}
+
+function flipCard(card) {
+    if (flippedCards.length < 2 && !card.classList.contains('flipped')) {
+        card.classList.add('flipped');
+        flippedCards.push(card);
+
+        if (flippedCards.length === 2) {
+            checkForMatch();
+        }
+    }
+}
+
+function checkForMatch() {
+    const [card1, card2] = flippedCards;
+    const index1 = parseInt(card1.getAttribute('data-index'), 10);
+    const index2 = parseInt(card2.getAttribute('data-index'), 10);
+
+    const pass1 = memoPairs[index1];
+    const pass2 = memoPairs[index2];
+
+    if (pass1.tema === pass2.tema) {
+        // ACERTÓ
+        players[currentPlayerIndex].score += 5;
+        matchedPairs++;
+        showNotification(`¡Par encontrado! +5 pts para ${players[currentPlayerIndex].name}`);
+
+        flippedCards = [];
+        updateScoreboard();
+
+        if (matchedPairs === bibleData.memo.length) {
+            showNotification("🎉 ¡Han encontrado todos los pares!");
+        }
+        // Mantiene turno si acierta, o nextTurn() si lo deseas
+        // nextTurn();
+    } else {
+        // FALLÓ
+        setTimeout(() => {
+            card1.classList.remove('flipped');
+            card2.classList.remove('flipped');
+            flippedCards = [];
+            nextTurn();
+        }, 1000);
+    }
+}
+
+/*******************************************************
+ * FUNCIÓN AUXILIAR: shuffle
+ *******************************************************/
+function shuffleArray(array) {
+    return array.sort(() => Math.random() - 0.5);
 }
