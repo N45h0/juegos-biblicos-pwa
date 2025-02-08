@@ -1248,49 +1248,166 @@ const bibleData = {
   }
 ];
 
-    memo: [
-        { 
-            tema: "Salvación por fe", 
-            pasaje1: "Efesios 2:8-9", 
-            pasaje2: "Romanos 3:28" 
-        },
-        { 
-            tema: "Amor al prójimo", 
-            pasaje1: "Mateo 22:39", 
-            pasaje2: "Levítico 19:18" 
-        },
-        { 
-            tema: "Resurrección", 
-            pasaje1: "1 Corintios 15:20", 
-            pasaje2: "Juan 11:25" 
-        },
-        { 
-            tema: "Perdón", 
-            pasaje1: "Mateo 6:14", 
-            pasaje2: "Colosenses 3:13" 
-        },
-        {
-            tema: "Creación",
-            pasaje1: "Génesis 1:1",
-            pasaje2: "Juan 1:3"
-        },
-        {
-            tema: "Pecado original",
-            pasaje1: "Romanos 3:23",
-            pasaje2: "Romanos 6:23"
-        },
-        {
-            tema: "Fe de Abraham",
-            pasaje1: "Génesis 15:6",
-            pasaje2: "Romanos 4:3"
-        },
-        {
-            tema: "Segunda Venida",
-            pasaje1: "Hechos 1:11",
-            pasaje2: "Apocalipsis 22:20"
-        },
-        // ... 23 pares más ...
-    ]
+memo: [
+    { 
+        tema: "Salvación por fe", 
+        pasaje1: "Efesios 2:8-9", 
+        pasaje2: "Romanos 3:28" 
+    },
+    { 
+        tema: "Amor al prójimo", 
+        pasaje1: "Mateo 22:39", 
+        pasaje2: "Levítico 19:18" 
+    },
+    { 
+        tema: "Resurrección", 
+        pasaje1: "1 Corintios 15:20", 
+        pasaje2: "Juan 11:25" 
+    },
+    { 
+        tema: "Perdón", 
+        pasaje1: "Mateo 6:14", 
+        pasaje2: "Colosenses 3:13" 
+    },
+    {
+        tema: "Creación",
+        pasaje1: "Génesis 1:1",
+        pasaje2: "Juan 1:3"
+    },
+    {
+        tema: "Pecado original",
+        pasaje1: "Romanos 3:23",
+        pasaje2: "Romanos 6:23"
+    },
+    {
+        tema: "Fe de Abraham",
+        pasaje1: "Génesis 15:6",
+        pasaje2: "Romanos 4:3"
+    },
+    {
+        tema: "Segunda Venida",
+        pasaje1: "Hechos 1:11",
+        pasaje2: "Apocalipsis 22:20"
+    },
+
+    // --- 23 pares adicionales ---
+
+    {
+        tema: "Fidelidad de Dios",
+        pasaje1: "Lamentaciones 3:22-23",
+        pasaje2: "2 Timoteo 2:13"
+    },
+    {
+        tema: "Nueva vida en Cristo",
+        pasaje1: "2 Corintios 5:17",
+        pasaje2: "Romanos 6:4"
+    },
+    {
+        tema: "El amor de Dios",
+        pasaje1: "Juan 3:16",
+        pasaje2: "1 Juan 4:9"
+    },
+    {
+        tema: "El fruto del Espíritu",
+        pasaje1: "Gálatas 5:22-23",
+        pasaje2: "Efesios 5:9"
+    },
+    {
+        tema: "La oración",
+        pasaje1: "Mateo 6:9-13",
+        pasaje2: "Santiago 5:16"
+    },
+    {
+        tema: "La humildad",
+        pasaje1: "Filipenses 2:3",
+        pasaje2: "1 Pedro 5:6"
+    },
+    {
+        tema: "Confianza en Dios",
+        pasaje1: "Proverbios 3:5-6",
+        pasaje2: "Salmos 37:5"
+    },
+    {
+        tema: "Consuelo en la aflicción",
+        pasaje1: "Salmos 34:18",
+        pasaje2: "2 Corintios 1:3-4"
+    },
+    {
+        tema: "Obediencia a Dios",
+        pasaje1: "Juan 14:15",
+        pasaje2: "1 Juan 5:3"
+    },
+    {
+        tema: "La gracia de Dios",
+        pasaje1: "Tito 2:11",
+        pasaje2: "2 Corintios 12:9"
+    },
+    {
+        tema: "Sabiduría Divina",
+        pasaje1: "Santiago 1:5",
+        pasaje2: "Proverbios 9:10"
+    },
+    {
+        tema: "Arrepentimiento",
+        pasaje1: "Hechos 3:19",
+        pasaje2: "Lucas 13:3"
+    },
+    {
+        tema: "Libertad en Cristo",
+        pasaje1: "Gálatas 5:1",
+        pasaje2: "Juan 8:36"
+    },
+    {
+        tema: "El Reino de Dios",
+        pasaje1: "Mateo 6:33",
+        pasaje2: "Romanos 14:17"
+    },
+    {
+        tema: "La armadura de Dios",
+        pasaje1: "Efesios 6:11",
+        pasaje2: "2 Corintios 10:4"
+    },
+    {
+        tema: "Esperanza eterna",
+        pasaje1: "Romanos 15:13",
+        pasaje2: "1 Pedro 1:3"
+    },
+    {
+        tema: "La disciplina de Dios",
+        pasaje1: "Hebreos 12:6",
+        pasaje2: "Proverbios 3:11-12"
+    },
+    {
+        tema: "El poder de la lengua",
+        pasaje1: "Santiago 3:5-6",
+        pasaje2: "Proverbios 18:21"
+    },
+    {
+        tema: "Unidad en Cristo",
+        pasaje1: "Efesios 4:3",
+        pasaje2: "Juan 17:21"
+    },
+    {
+        tema: "La soberanía de Dios",
+        pasaje1: "Daniel 4:35",
+        pasaje2: "Romanos 9:20-21"
+    },
+    {
+        tema: "La fe como victoria",
+        pasaje1: "1 Juan 5:4",
+        pasaje2: "Marcos 11:22-24"
+    },
+    {
+        tema: "El gozo en el Señor",
+        pasaje1: "Filipenses 4:4",
+        pasaje2: "Nehemías 8:10"
+    },
+    {
+        tema: "La verdad de la Palabra",
+        pasaje1: "Juan 17:17",
+        pasaje2: "2 Timoteo 3:16"
+    }
+]
 };
 
 // ====================================================
