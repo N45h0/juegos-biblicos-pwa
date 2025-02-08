@@ -1590,17 +1590,17 @@ document.getElementById('google-btn').addEventListener('click', () => {
 // ESCUCHAR ESTADO DE SESIÓN
 // ======================
 auth.onAuthStateChanged((user) => {
-  if (user) {
-    console.log("Usuario activo:", user.email);
-    document.getElementById('player-setup-section').style.display = 'block';
-    document.getElementById('user-info').textContent = `Hola, ${user.email}`;
-    document.getElementById('logout-btn').style.display = 'inline-block';
-  } else {
-    console.log("No hay usuario en sesión");
-    document.getElementById('player-setup-section').style.display = 'none';
-    document.getElementById('user-info').textContent = "";
-    document.getElementById('logout-btn').style.display = 'none';
-  }
+    if (user) {
+        console.log("Usuario activo:", user.email);
+        document.getElementById('player-setup-section').style.display = 'block';
+        document.getElementById('user-info').textContent = `Hola, ${user.email}`;
+        document.getElementById('logout-btn').style.display = 'inline-block';
+    } else {
+        console.log("No hay usuario en sesión");
+        document.getElementById('player-setup-section').style.display = 'none';
+        document.getElementById('user-info').textContent = "";
+        document.getElementById('logout-btn').style.display = 'none';
+    }
 });
 
 // ======================
@@ -1711,4 +1711,3 @@ function showNotification(message, isError = false) {
         notificationArea.removeChild(notif);
     }, 3000);
 }
-
