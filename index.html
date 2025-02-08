@@ -7,9 +7,35 @@
 </head>
 <body>
   <div class="container">
-    <!-- Pantalla de inicio -->
+
+    <!-- PANTALLA DE INICIO -->
     <div id="start-screen">
       <h1>📖 Juegos Bíblicos</h1>
+
+      <!-- Formularios de REGISTRO / LOGIN -->
+      <div>
+        <h2>Registro</h2>
+        <form id="register-form">
+          <input type="email" id="register-email" placeholder="Email" required />
+          <input type="password" id="register-pass" placeholder="Contraseña" required />
+          <button type="submit">Registrarse</button>
+        </form>
+      </div>
+
+      <div>
+        <h2>Iniciar Sesión</h2>
+        <form id="login-form">
+          <input type="email" id="login-email" placeholder="Email" required />
+          <input type="password" id="login-pass" placeholder="Contraseña" required />
+          <button type="submit">Iniciar Sesión</button>
+        </form>
+        <button id="google-btn">Iniciar con Google</button>
+      </div>
+      
+      <!-- Botón para cerrar sesión -->
+      <button onclick="logout()">Cerrar sesión</button>
+
+      <!-- Configuración de jugadores -->
       <div class="player-setup">
         <div class="player-number">
           <label>Número de jugadores:</label>
@@ -31,21 +57,21 @@
       </div>
     </div>
 
-    <!-- Pantalla de juego -->
+    <!-- PANTALLA DE JUEGO -->
     <div id="game-screen" style="display: none;">
       <div class="scoreboard">
-        <div class="current-player">Turno: <span id="current-player-name"></span></div>
+        <div class="current-player">
+          Turno: <span id="current-player-name"></span>
+        </div>
         <div class="scores" id="scores-container"></div>
       </div>
 
-      <!-- Botones para elegir juego -->
       <div class="game-buttons">
         <button onclick="loadGame('tabu')">Tabú (100 tarjetas)</button>
         <button onclick="loadGame('trivia')">Trivia (100 preguntas)</button>
         <button onclick="loadGame('memo')">Memo (50 pares)</button>
       </div>
 
-      <!-- Contenedor donde se inyectan Tabú, Trivia o Memo -->
       <div id="game-container"></div>
     </div>
 
@@ -60,34 +86,30 @@
 
   <!-- Área de notificaciones no bloqueantes -->
   <div id="notification-area"></div>
-  
-  
+
+  <!-- Scripts de Firebase (versión “namespace”) -->
   <script src="https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.17.2/firebase-auth.js"></script>
-  <script type="module">
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.3.0/firebase-app.js";
-  import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.3.0/firebase-analytics.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
-
-  // Your web app's Firebase configuration
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-  const firebaseConfig = {
-    apiKey: "AIzaSyCIoeE2vmY6USqFi-osi7kQVu4-Or_JJsE",
-    authDomain: "biblegames-6b936.firebaseapp.com",
-    projectId: "biblegames-6b936",
-    storageBucket: "biblegames-6b936.firebasestorage.app",
-    messagingSenderId: "343894525738",
-    appId: "1:343894525738:web:a99c3a460aa0c76a1a8053",
-    measurementId: "G-9HZELG76YK"
-  };
-
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
+  
+  <script>
+    // Configuración de Firebase
+    const firebaseConfig = {
+      apiKey: "AIzaSyCIoeE2vmY6USqFi-osi7kQVu4-Or_JJsE",
+      authDomain: "biblegames-6b936.firebaseapp.com",
+      projectId: "biblegames-6b936",
+      storageBucket: "biblegames-6b936.firebasestorage.app",
+      messagingSenderId: "343894525738",
+      appId: "1:343894525738:web:a99c3a460aa0c76a1a8053",
+      measurementId: "G-9HZELG76YK"
+    };
+    
+    // Inicializar Firebase (namespace approach)
+    firebase.initializeApp(firebaseConfig);
+    // Instancia de Auth
+    const auth = firebase.auth();
   </script>
-  <!-- Script principal (con solo lógica de Memo incluida) -->
+
+  <!-- Script principal donde está toda la lógica -->
   <script src="app.js"></script>
 </body>
 </html>
