@@ -466,7 +466,51 @@ const bibleData = {
             prohibidas: ["Jueces", "Cántico", "Barac"],
             referencia: "Jueces 4-5"
         },
-        // ... 48 tarjetas más ...
+        {
+            palabra: "Jael",
+            prohibidas: ["Estaca", "Sísara", "Tienda"],
+            referencia: "Jueces 4:17-22"
+        },
+        {
+            palabra: "Raquel",
+            prohibidas: ["Jacob", "Esteril", "Benjamín"],
+            referencia: "Génesis 29-35"
+        },
+        {
+            palabra: "Lea",
+            prohibidas: ["Jacob", "Hijos", "Ojos"],
+            referencia: "Génesis 29-30"
+        },
+        {
+            palabra: "Rebeca",
+            prohibidas: ["Isaac", "Esaú", "Jacob"],
+            referencia: "Génesis 24-27"
+        },
+        {
+            palabra: "Sara",
+            prohibidas: ["Abraham", "Isaac", "Risa"],
+            referencia: "Génesis 17-23"
+        },
+        {
+            palabra: "Lot",
+            prohibidas: ["Sodoma", "Esposa", "Sal"],
+            referencia: "Génesis 19:1-29"
+        },
+        {
+            palabra: "Melquisedec",
+            prohibidas: ["Sacerdote", "Pan", "Vino"],
+            referencia: "Génesis 14:18-20"
+        },
+        {
+            palabra: "Enoc",
+            prohibidas: ["Caminó con Dios", "Arrebatado", "Génesis"],
+            referencia: "Génesis 5:21-24"
+        },
+        {
+            palabra: "Caín",
+            prohibidas: ["Abel", "Asesinato", "Marca"],
+            referencia: "Génesis 4:1-16"
+        },
     ],
 
     trivia: [
