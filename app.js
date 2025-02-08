@@ -1528,8 +1528,10 @@ let currentPlayerIndex = 0;
 let currentTabuIndex = 0;
 let currentTriviaIndex = 0;
 let selectedViolations = [];
+// Variables para Memo
 let flippedCards = [];
 let matchedPairs = 0;
+let memoPairs = [];
 
 // Función para crear inputs dinámicos
 function createPlayerInputs(numberOfPlayers) {
@@ -1538,11 +1540,11 @@ function createPlayerInputs(numberOfPlayers) {
 
     for (let i = 1; i <= numberOfPlayers; i++) {
         container.innerHTML += `
-                <input type="text" 
-                       id="player${i}" 
-                       placeholder="Jugador ${i}" 
-                       required>
-            `;
+            <input type="text"
+                   id="player${i}"
+                   placeholder="Jugador ${i}"
+                   required>
+        `;
     }
 }
 
@@ -1554,7 +1556,7 @@ function startGame() {
     for (let i = 1; i <= numberOfPlayers; i++) {
         const name = document.getElementById(`player${i}`).value || `Jugador ${i}`;
         players.push({
-            name: name,
+            name,
             score: 0
         });
     }
@@ -1569,14 +1571,14 @@ function updateScoreboard() {
     const scoresContainer = document.getElementById('scores-container');
     const currentPlayer = document.getElementById('current-player-name');
 
-    // Actualizar puntuaciones
+    // Mostrar puntuaciones
     scoresContainer.innerHTML = players.map(player => `
-            <div class="score-item">
-                ${player.name}: <span>${player.score} pts</span>
-            </div>
-        `).join('');
+        <div class="score-item">
+            ${player.name}: <span>${player.score} pts</span>
+        </div>
+    `).join('');
 
-    // Actualizar turno actual
+    // Mostrar quién juega actualmente
     currentPlayer.textContent = players[currentPlayerIndex].name;
 }
 
@@ -1627,40 +1629,40 @@ function loadTabuCard() {
     const container = document.getElementById("game-container");
 
     container.innerHTML = `
-            <div class="tabu-card">
-                <h2>${card.palabra}</h2>
-                <div class="prohibidas-box">
-                    <h4>Palabras prohibidas:</h4>
-                    ${card.prohibidas.map(word => `
-                        <label class="violation-check">
-                            <input type="checkbox" value="${word}">
-                            ${word}
-                        </label>
-                    `).join("")}
-                </div>
-                
-                <div class="tabu-controls">
-                    <button onclick="handleTabuSuccess()">✅ Acierto (sin violaciones)</button>
-                    <button onclick="handleTabuFailure()">❌ Fallo</button>
-                </div>
-                
-                <div class="guesser-selection" id="guesser-section">
-                    <h4>¿Quién adivinó?</h4>
-                    ${players.map((player, index) => `
-                        <button onclick="assignGuesserPoints(${index})">
-                            ${player.name}
-                        </button>
-                    `).join("")}
-                </div>
-                
-                <small>Referencia: ${card.referencia}</small>
+        <div class="tabu-card">
+            <h2>${card.palabra}</h2>
+            <div class="prohibidas-box">
+                <h4>Palabras prohibidas:</h4>
+                ${card.prohibidas.map(word => `
+                    <label class="violation-check">
+                        <input type="checkbox" value="${word}">
+                        ${word}
+                    </label>
+                `).join("")}
             </div>
-        `;
+            
+            <div class="tabu-controls">
+                <button onclick="handleTabuSuccess()">✅ Acierto (sin violaciones)</button>
+                <button onclick="handleTabuFailure()">❌ Fallo</button>
+            </div>
+            
+            <div class="guesser-selection" id="guesser-section">
+                <h4>¿Quién adivinó?</h4>
+                ${players.map((player, index) => `
+                    <button onclick="assignGuesserPoints(${index})">
+                        ${player.name}
+                    </button>
+                `).join("")}
+            </div>
+            
+            <small>Referencia: ${card.referencia}</small>
+        </div>
+    `;
 
     // Inicializar selección de violaciones
     selectedViolations = [];
     document.querySelectorAll('.violation-check input').forEach(checkbox => {
-        checkbox.addEventListener('change', (e) => {
+        checkbox.addEventListener('change', e => {
             if (e.target.checked) {
                 selectedViolations.push(e.target.value);
             } else {
@@ -1671,22 +1673,20 @@ function loadTabuCard() {
 }
 
 function handleTabuSuccess() {
-    // Calcular puntos: +15 por acierto, -3 por cada violación
+    // +15 por acierto, -3 por cada palabra prohibida dicha
     const penalty = selectedViolations.length * 3;
     const totalPoints = 15 - penalty;
 
     players[currentPlayerIndex].score += Math.max(totalPoints, 0);
 
-    showNotification(
-        `${players[currentPlayerIndex].name} obtiene ${Math.max(totalPoints, 0)} puntos!`
-    );
+    showNotification(`${players[currentPlayerIndex].name} obtiene ${Math.max(totalPoints, 0)} puntos!`);
     nextTabuCard();
 }
 
 function handleTabuFailure() {
     showNotification("❌ Nadie adivinó la palabra", true);
     nextTabuCard();
-    // Al fallar, se pasa el turno
+    // Al fallar, se cambia el turno
     nextTurn();
 }
 
@@ -1709,71 +1709,107 @@ function loadTriviaQuestion() {
     const container = document.getElementById("game-container");
 
     container.innerHTML = `
-            <div class="card">
-                <h3>${question.pregunta}</h3>
-                <div class="opciones">
-                    ${question.opciones.map((op, i) => `
-                        <button onclick="handleTriviaAnswer(${currentTriviaIndex}, ${i})">
-                            ${op}
-                        </button>
-                    `).join("")}
-                </div>
-                <small>Referencia: ${question.referencia}</small>
+        <div class="card">
+            <h3>${question.pregunta}</h3>
+            <div class="opciones">
+                ${question.opciones.map((op, i) => `
+                    <button onclick="handleTriviaAnswer(${currentTriviaIndex}, ${i})">
+                        ${op}
+                    </button>
+                `).join("")}
             </div>
-        `;
+            <small>Referencia: ${question.referencia}</small>
+        </div>
+    `;
 }
 
 function handleTriviaAnswer(questionIndex, selectedOption) {
-  const correct = bibleData.trivia[questionIndex].respuesta === selectedOption;
-  
-  if (correct) {
-    players[currentPlayerIndex].score += 10;
-    showNotification(`✅ Correcto! +10 puntos para ${players[currentPlayerIndex].name}`);
+    const correct = bibleData.trivia[questionIndex].respuesta === selectedOption;
+    
+    if (correct) {
+        players[currentPlayerIndex].score += 10;
+        showNotification(`✅ Correcto! +10 puntos para ${players[currentPlayerIndex].name}`);
+        // Si acierta, NO se cambia de turno
+        // nextTurn(); // Omitido para conservar turno
+    } else {
+        // Respuesta incorrecta
+        const correctAnswer = bibleData.trivia[questionIndex].opciones[
+            bibleData.trivia[questionIndex].respuesta
+        ];
+        showNotification(`❌ Incorrecto. La respuesta era: ${correctAnswer}`, true);
 
-    // PASO IMPORTANTE: NO cambiar de turno
-    // nextTurn(); <-- Esto se elimina si quieres que siga el mismo jugador
+        // Al fallar, se pasa el turno
+        nextTurn();
+    }
 
-  } else {
-    const correctAnswer = bibleData.trivia[questionIndex].opciones[
-      bibleData.trivia[questionIndex].respuesta
-    ];
-    showNotification(`❌ Incorrecto. La respuesta era: ${correctAnswer}`, true);
-
-    // Al fallar, SÍ se cambia de turno
-    nextTurn();
-  }
-
-  // Cargar siguiente pregunta
-  currentTriviaIndex = (currentTriviaIndex + 1) % bibleData.trivia.length;
-  loadTriviaQuestion();
+    // Cargar siguiente pregunta
+    currentTriviaIndex = (currentTriviaIndex + 1) % bibleData.trivia.length;
+    loadTriviaQuestion();
 }
 
-
 // ====================================================
-// LÓGICA DE MEMO (CON TURNOS Y PUNTOS)
+// LÓGICA DE MEMO (CON 5 SEG DE PREVIEW Y COMPARACIÓN POR TEMA)
 // ====================================================
 function loadMemoGame() {
     const container = document.getElementById("game-container");
-    const memoPairs = shuffleArray([...bibleData.memo.flatMap(pair => [pair.pasaje1, pair.pasaje2])]);
+
+    // Convertir cada { tema, pasaje1, pasaje2 } en dos tarjetas
+    // que comparten el mismo "tema".
+    memoPairs = bibleData.memo.flatMap(pair => [
+      {
+        tema: pair.tema,
+        cita: pair.pasaje1.cita,
+        texto: pair.pasaje1.texto
+      },
+      {
+        tema: pair.tema,
+        cita: pair.pasaje2.cita,
+        texto: pair.pasaje2.texto
+      }
+    ]);
+
+    // Barajamos las tarjetas
+    memoPairs = shuffleArray(memoPairs);
 
     // Reiniciar estado
     flippedCards = [];
     matchedPairs = 0;
 
+    // Generar tablero con "?" al frente y cita+texto en la parte trasera
     container.innerHTML = `
-            <div class="memo-grid">
-                ${memoPairs.map(text => `
-                    <div class="memo-card" onclick="flipCard(this)">
-                        <div class="front">?</div>
-                        <div class="back">${text}</div>
-                    </div>
-                `).join("")}
+      <div class="memo-intro">
+        <p>
+          ¡Encuentra las parejas que comparten el mismo <b>tema</b>!
+          Tendrás <b>5 segundos</b> para ver todas las tarjetas volteadas antes de que se oculten.
+        </p>
+      </div>
+      <div class="memo-grid">
+        ${memoPairs.map((pasaje, index) => `
+          <div class="memo-card" data-index="${index}" onclick="flipCard(this)">
+            <div class="front">?</div>
+            <div class="back">
+              <strong>${pasaje.cita}</strong><br>
+              <small>${pasaje.texto}</small>
             </div>
-        `;
+          </div>
+        `).join("")}
+      </div>
+    `;
+
+    // Actualizamos marcador
+    updateScoreboard();
+
+    // Mostrar todas las tarjetas (preview) durante 5 seg
+    const allCards = document.querySelectorAll('.memo-card');
+    allCards.forEach(card => card.classList.add('flipped'));
+    
+    setTimeout(() => {
+      allCards.forEach(card => card.classList.remove('flipped'));
+    }, 5000);
 }
 
 function flipCard(card) {
-    // Permitir voltear hasta 2 cartas
+    // Permitir voltear hasta 2
     if (flippedCards.length < 2 && !card.classList.contains('flipped')) {
         card.classList.add('flipped');
         flippedCards.push(card);
@@ -1786,36 +1822,35 @@ function flipCard(card) {
 
 function checkForMatch() {
     const [card1, card2] = flippedCards;
-    const text1 = card1.querySelector('.back').textContent;
-    const text2 = card2.querySelector('.back').textContent;
+    const index1 = parseInt(card1.getAttribute('data-index'), 10);
+    const index2 = parseInt(card2.getAttribute('data-index'), 10);
 
-    const isMatch = bibleData.memo.some(pair =>
-        (pair.pasaje1 === text1 && pair.pasaje2 === text2) ||
-        (pair.pasaje1 === text2 && pair.pasaje2 === text1)
-    );
+    const pass1 = memoPairs[index1];
+    const pass2 = memoPairs[index2];
 
-    if (isMatch) {
-        // Suma puntos al jugador actual
+    // Coinciden si tienen el mismo "tema"
+    if (pass1.tema === pass2.tema) {
+        // ACERTÓ
         players[currentPlayerIndex].score += 5;
         matchedPairs++;
-        showNotification(`¡Par encontrado! +5 puntos para ${players[currentPlayerIndex].name}`);
-
+        showNotification(`¡Par encontrado! +5 pts para ${players[currentPlayerIndex].name}`);
+        
         flippedCards = [];
+        updateScoreboard();
 
-        // Comprobar si se encontraron todos los pares
+        // Verificar si terminaron todos los pares
         if (matchedPairs === bibleData.memo.length) {
-            showNotification(`🎉 ¡Felicidades! Han encontrado todos los pares.`);
+            showNotification("🎉 ¡Han encontrado todos los pares!");
         }
-        // OPCIONAL: Si quieres que el mismo jugador continúe cuando acierta, no hacemos nextTurn() aquí.
-        // nextTurn(); // Descomenta si quieres que pase el turno tras acertar
+        // Si NO quieres que mantenga el turno al acertar, descomenta:
+        // nextTurn();
     } else {
-        // Esperar un segundo y voltear
+        // FALLÓ
         setTimeout(() => {
             card1.classList.remove('flipped');
             card2.classList.remove('flipped');
             flippedCards = [];
-            // Si falla, pasa el turno
-            nextTurn();
+            nextTurn(); // se pasa el turno al fallar
         }, 1000);
     }
 }
